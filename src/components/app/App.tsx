@@ -1,4 +1,4 @@
-import MainPage from '../pages/main/mainPage';
+import Main from '../pages/main/Main';
 import React from 'react';
 
 interface MainPageProps {
@@ -9,7 +9,7 @@ interface MainPageProps {
 
 function App(mainpageprops: MainPageProps): React.FunctionComponent {
   return (
-    <MainPage movieName={mainpageprops.movieName}
+    <Main movieName={mainpageprops.movieName}
       genre={mainpageprops.genre}
       promoDate={mainpageprops.promoDate}
     />

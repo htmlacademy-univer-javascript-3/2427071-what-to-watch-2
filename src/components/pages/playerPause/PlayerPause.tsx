@@ -3,7 +3,7 @@ import React from 'react';
 function PlayerPause(): React.FunctionComponent {
   return (
     <div className="player">
-      <video src="src/components/pages/playerPause/playerPause#" className="player__video" poster="img/player-poster.jpg" />
+      <video src="src/components/pages/playerPause/PlayerPause#" className="player__video" poster="img/player-poster.jpg" />
       <button type="button" className="player__exit">
         Exit
       </button>

@@ -1,4 +1,4 @@
-import Card from '../../card/card';
+import Card from '../../card/Card';
 import React from 'react';
 
 interface MainPageProps {
@@ -7,7 +7,7 @@ interface MainPageProps {
   promoDate: string;
 }
 
-function MainPage(props: MainPageProps): React.FunctionComponent {
+function Main(props: MainPageProps): React.FunctionComponent {
   return (
     <>
       <section className="film-card">
@@ -82,52 +82,52 @@ function MainPage(props: MainPageProps): React.FunctionComponent {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 All genres
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Comedies
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Crime
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Documentary
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Dramas
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Horror
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Kids &amp; Family
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Romance
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Sci-Fi
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/mainPage#" className="catalog__genres-link">
+              <a href="src/components/pages/main/Main#MainPage.tsx" className="catalog__genres-link">
                 Thrillers
               </a>
             </li>
@@ -160,4 +160,4 @@ function MainPage(props: MainPageProps): React.FunctionComponent {
   );
 }
 
-export default MainPage;
+export default Main;

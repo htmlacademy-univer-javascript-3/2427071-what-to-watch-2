@@ -14,7 +14,7 @@ function LoginInError(): React.FunctionComponent {
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="src/components/pages/loginError/loginError#" className="sign-in__form">
+        <form action="src/components/pages/loginError/loginError#LoginError.tsx" className="sign-in__form">
           <div className="sign-in__message">
             <p>Please enter a valid email address</p>
           </div>
