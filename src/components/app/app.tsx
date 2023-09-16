@@ -1,8 +1,18 @@
-import MainPage from '../pages/main-page';
+import MainPage from '../pages/mainPage';
+import React from 'react';
 
-function App() {
+interface MainPageProps {
+  movieName: string;
+  genre: string;
+  promoDate: string;
+}
+
+function App(mainpageprops: MainPageProps): React.FunctionComponent {
   return (
-    <MainPage/>
+    <MainPage movieName={mainpageprops.movieName}
+      genre={mainpageprops.genre}
+      promoDate={mainpageprops.promoDate}
+    />
   );
 }
 

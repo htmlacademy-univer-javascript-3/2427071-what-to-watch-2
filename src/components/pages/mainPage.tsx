@@ -1,6 +1,13 @@
 import Card from '../card/card';
+import React from 'react';
 
-function MainPage() {
+interface MainPageProps {
+  movieName: string;
+  genre: string;
+  promoDate: string;
+}
+
+function MainPage(props: MainPageProps): React.FunctionComponent {
   return (
     <>
       <section className="film-card">
@@ -46,10 +53,10 @@ function MainPage() {
               />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{props.movieName}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{props.genre}</span>
+                <span className="film-card__year">{props.promoDate}</span>
               </p>
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
