@@ -1,4 +1,4 @@
-import MainPage from '../pages/mainPage';
+import MainPage from '../pages/main/mainPage';
 import React from 'react';
 
 interface MainPageProps {
