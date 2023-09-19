@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Player(): React.FunctionComponent {
+function PlayerPause(): React.FunctionComponent {
   return (
     <div className="player">
-      <video src="src/components/pages/player/Player#" className="player__video" poster="img/player-poster.jpg" />
+      <video src="src/components/pages/player-pause/player-pause#" className="player__video" poster="img/player-poster.jpg" />
       <button type="button" className="player__exit">
         Exit
       </button>
@@ -19,10 +19,10 @@ function Player(): React.FunctionComponent {
         </div>
         <div className="player__controls-row">
           <button type="button" className="player__play">
-            <svg viewBox="0 0 19 19" width={19} height={19}>
-              <use xlinkHref="#play-s" />
+            <svg viewBox="0 0 14 21" width={14} height={21}>
+              <use xlinkHref="#pause" />
             </svg>
-            <span>Play</span>
+            <span>Pause</span>
           </button>
           <div className="player__name">Transpotting</div>
           <button type="button" className="player__full-screen">
@@ -37,4 +37,4 @@ function Player(): React.FunctionComponent {
   );
 }
 
-export default Player;
+export default PlayerPause;

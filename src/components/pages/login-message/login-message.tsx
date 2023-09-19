@@ -14,7 +14,7 @@ function LoginInMessage(): React.FunctionComponent {
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="src/components/pages/loginMessage/loginMessage#LoginMessage.tsx" className="sign-in__form">
+        <form action="src/components/pages/login-message/login-message#LoginMessage.tsx" className="sign-in__form">
           <div className="sign-in__message">
             <p>
               We can’t recognize this email <br /> and password combination.

@@ -57,7 +57,7 @@ function AddReview(): React.FunctionComponent {
         </div>
       </div>
       <div className="add-review">
-        <form action="src/components/pages/addReview/addReview#AddReview.tsx" className="add-review__form">
+        <form action="src/components/pages/add-review/add-review#AddReview.tsx" className="add-review__form">
           <div className="rating">
             <div className="rating__stars">
               <input
