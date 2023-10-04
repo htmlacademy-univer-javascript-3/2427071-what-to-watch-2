@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom';
 
-export default function Logo(): React.JSX.Element {
+type LogoProps = {
+  color?: string;
+};
+
+export default function Logo({ color = '' }: LogoProps): JSX.Element {
+  const computedStyleClass = `logo__link ${color ? 'logo__link--light' : ''}`;
+
   return (
     <div className="logo">
-      <Link to="/" className="logo__link">
+      <Link to="/" className={computedStyleClass}>
         <span className="logo__letter logo__letter--1">W</span>
         <span className="logo__letter logo__letter--2">T</span>
         <span className="logo__letter logo__letter--3">W</span>
