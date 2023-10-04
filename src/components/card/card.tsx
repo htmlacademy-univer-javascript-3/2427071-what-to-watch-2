@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Card(): React.FunctionComponent {
   return (
@@ -12,9 +13,9 @@ function Card(): React.FunctionComponent {
         />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">
+        <Link className="small-film-card__link" to="/films:id">
           Fantastic Beasts: The Crimes of Grindelwald
-        </a>
+        </Link>
       </h3>
     </article>
   );

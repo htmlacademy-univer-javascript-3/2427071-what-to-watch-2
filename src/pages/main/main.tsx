@@ -1,5 +1,7 @@
-import Card from '../../card/card';
+import Card from '../../components/card/card';
 import React from 'react';
+import Logo from '../../components/logo/logo';
+import {Link} from 'react-router-dom';
 
 interface MainPageProps {
   movieName: string;
@@ -19,13 +21,7 @@ function Main(props: MainPageProps): React.FunctionComponent {
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo/>
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
@@ -61,13 +57,13 @@ function Main(props: MainPageProps): React.FunctionComponent {
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width={19} height={19}>
-                    <use xlinkHref="#play-s" />
+                    <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
+                    <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
                   <span className="film-card__count">9</span>
@@ -82,59 +78,59 @@ function Main(props: MainPageProps): React.FunctionComponent {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 All genres
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Comedies
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Crime
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Documentary
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Dramas
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Horror
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Kids &amp; Family
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Romance
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Sci-Fi
               </a>
             </li>
             <li className="catalog__genres-item">
-              <a href="src/components/pages/main/main#MainPage.tsx" className="catalog__genres-link">
+              <a href="src/pages/main/main#" className="catalog__genres-link">
                 Thrillers
               </a>
             </li>
           </ul>
           <div className="catalog__films-list">
-            {Array.from({ length: 20 }, (_, index) => (
-              <Card key={index} />
+            {Array.from({length: 20}, (_, index) => (
+              <Card key={index}/>
             ))}
           </div>
           <div className="catalog__more">
@@ -145,11 +141,14 @@ function Main(props: MainPageProps): React.FunctionComponent {
         </section>
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <Link to="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+
+              {/* TODO  может Logo? */}
+
+            </Link>
           </div>
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

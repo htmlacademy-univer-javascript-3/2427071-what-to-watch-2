@@ -3,7 +3,7 @@ import React from 'react';
 function Player(): React.FunctionComponent {
   return (
     <div className="player">
-      <video src="src/components/pages/player/player#" className="player__video" poster="img/player-poster.jpg" />
+      <video src="src/pages/player/player#" className="player__video" poster="img/player-poster.jpg" />
       <button type="button" className="player__exit">
         Exit
       </button>

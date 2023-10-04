@@ -1,23 +1,19 @@
 import React from 'react';
+import Logo from '../../components/logo/logo';
+import {Link} from 'react-router-dom';
 
 function LoginInMessage(): React.FunctionComponent {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        <div className="logo">
-          <a href="main.html" className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
+        <Logo/>
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="src/components/pages/login-message/login-message#LoginMessage.tsx" className="sign-in__form">
+        <form action="src/pages/login-message/login-message#" className="sign-in__form">
           <div className="sign-in__message">
             <p>
-              We can’t recognize this email <br /> and password combination.
+              We can’t recognize this email <br/> and password combination.
               Please try again.
             </p>
           </div>
@@ -62,11 +58,11 @@ function LoginInMessage(): React.FunctionComponent {
       </div>
       <footer className="page-footer">
         <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
+          <Link to="/" className="logo__link logo__link--light">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
         <div className="copyright">
           <p>© 2019 What to watch Ltd.</p>
