@@ -9,7 +9,7 @@ type MovieProps = {
   releaseDate: string;
 };
 
-function MovieCard({filmName, genre, releaseDate,}: MovieProps): React.FunctionComponent {
+function MovieCard({filmName, genre, releaseDate,}: MovieProps): React.JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">

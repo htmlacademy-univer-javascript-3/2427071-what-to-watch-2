@@ -3,10 +3,10 @@ import {AppRoute} from '../../enums/app-route.ts';
 import React from 'react';
 
 type PrivateRouteProps = {
-  children: React.FunctionComponent;
+  children: React.JSX.Element;
 };
 
-function PrivateRoute(props: PrivateRouteProps): React.FunctionComponent {
+function PrivateRoute(props: PrivateRouteProps): React.JSX.Element {
   const {children} = props;
 
   const isAuth = true;

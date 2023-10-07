@@ -5,7 +5,7 @@ type Props = {
   isLight?: boolean;
 };
 
-function Logo({ isLight = false }: Props): React.FunctionComponent {
+function Logo({ isLight = false }: Props): React.JSX.Element {
   const computedClass = `logo__link ${isLight ? 'logo__link--light' : ''}`;
 
   return (

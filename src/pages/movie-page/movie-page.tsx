@@ -5,7 +5,7 @@ import Footer from '../../components/footer/footer';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
 import Card from '../../components/card/card';
 
-function MoviePage(): React.FunctionComponent {
+function MoviePage(): React.JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">

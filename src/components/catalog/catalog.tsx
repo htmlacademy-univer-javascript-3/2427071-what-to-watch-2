@@ -2,7 +2,7 @@ import Card from '../card/card';
 import React from 'react';
 import GenresList from '../genre-list/genre-list';
 
-function Catalog(): React.FunctionComponent {
+function Catalog(): React.JSX.Element {
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>

@@ -4,7 +4,7 @@ import Footer from '../../components/footer/footer';
 import UserBlock from '../../components/user-block/user-block';
 import Card from '../../components/card/card';
 
-function MyList(): React.FunctionComponent {
+function MyList(): React.JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

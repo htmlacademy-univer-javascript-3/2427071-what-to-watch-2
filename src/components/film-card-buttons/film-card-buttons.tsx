@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FilmCardButtons(): React.FunctionComponent {
+function FilmCardButtons(): React.JSX.Element {
   return (
     <div className="film-card__buttons">
       <button className="btn btn--play film-card__button" type="button">

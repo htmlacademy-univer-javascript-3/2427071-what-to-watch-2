@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Player(): React.FunctionComponent {
+function Player(): React.JSX.Element {
   return (
     <div className="player">
       <video src="src/pages/player/player#" className="player__video" poster="img/player-poster.jpg" />

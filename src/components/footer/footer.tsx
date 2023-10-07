@@ -1,7 +1,7 @@
 import Logo from '../logo/logo';
 import React from 'react';
 
-function Footer(): React.FunctionComponent {
+function Footer(): React.JSX.Element {
   return (
     <footer className="page-footer">
       <Logo color={'dark'} />

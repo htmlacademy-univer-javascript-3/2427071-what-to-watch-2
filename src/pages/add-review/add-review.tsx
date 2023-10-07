@@ -5,7 +5,7 @@ import UserBlock from '../../components/user-block/user-block';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
 import './add-review.css';
 
-function AddReview(): React.FunctionComponent {
+function AddReview(): React.JSX.Element {
   const RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const RATING_DEFAULT = 8;
 

@@ -5,7 +5,7 @@ import Header from '../../components/header/header';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
 import Card from '../../components/card/card';
 
-function MoviePageReviews(): React.FunctionComponent {
+function MoviePageReviews(): React.JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">

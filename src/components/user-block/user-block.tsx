@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './user-block.css';
 import React from 'react';
 
-function UserBlock(): React.FunctionComponent {
+function UserBlock(): React.JSX.Element {
   return (
     <ul className="user-block">
       <li className="user-block__item">

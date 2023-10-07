@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-export default function PageNotFound(): React.FunctionComponent {
+function PageNotFound(): React.JSX.Element {
   return (
     <>
       <h1>Ошибка 404. Страница не найдена.</h1>
@@ -9,3 +9,5 @@ export default function PageNotFound(): React.FunctionComponent {
     </>
   );
 }
+
+export default PageNotFound;

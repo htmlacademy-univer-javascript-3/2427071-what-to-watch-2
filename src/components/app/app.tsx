@@ -16,7 +16,7 @@ interface MainPageProps {
   promoDate: string;
 }
 
-function App(mainpageprops: MainPageProps): React.FunctionComponent {
+function App(mainpageprops: MainPageProps): React.JSX.Element {
   return (
     <BrowserRouter>
       <Routes>

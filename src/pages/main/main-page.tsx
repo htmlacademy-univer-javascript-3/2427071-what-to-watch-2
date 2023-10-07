@@ -9,7 +9,7 @@ interface MainPageProps {
   promoDate: string;
 }
 
-function MainPage(props: MainPageProps): React.FunctionComponent {
+function MainPage(props: MainPageProps): React.JSX.Element {
   return (
     <>
       <MovieCard {...props} />

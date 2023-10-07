@@ -5,7 +5,7 @@ type GenreItemProps = {
   isActive: boolean;
 }
 
-function GenreItem({name, isActive}: GenreItemProps): React.FunctionComponent {
+function GenreItem({name, isActive}: GenreItemProps): React.JSX.Element {
   const computedClassName = `catalog__genres-item catalog__genres-item${
     isActive ? '--active' : ''}`;
 

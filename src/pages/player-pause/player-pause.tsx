@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PlayerPause(): React.FunctionComponent {
+function PlayerPause(): React.JSX.Element {
   return (
     <div className="player">
       <video src="src/pages/player-pause/player-pause#" className="player__video" poster="img/player-poster.jpg" />

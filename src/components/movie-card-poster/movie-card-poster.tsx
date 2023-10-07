@@ -7,7 +7,7 @@ type MovieCardPosterProps = {
 
 function MovieCardPoster({
   size = '',
-}: MovieCardPosterProps): React.FunctionComponent {
+}: MovieCardPosterProps): React.JSX.Element {
   const computedClass = `film-card__poster ${
     size ? `film-card__poster--${size}` : ''
   }`;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 
-function HeadGuest(): React.FunctionComponent {
+function HeadGuest(): React.JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
