@@ -1,7 +1,7 @@
 import Logo from '../logo/logo';
 import React from 'react';
 
-export default function Footer(): React.FunctionComponent {
+function Footer(): React.FunctionComponent {
   return (
     <footer className="page-footer">
       <Logo color={'dark'} />
@@ -11,3 +11,5 @@ export default function Footer(): React.FunctionComponent {
     </footer>
   );
 }
+
+export default Footer;

@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 
 function AddReview(): React.FunctionComponent {
-  const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const defaultValue = 8;
+  const RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const RATING_DEFAULT = 8;
 
   return (
     <section className="film-card film-card--full">
@@ -63,7 +63,7 @@ function AddReview(): React.FunctionComponent {
         <form action="src/pages/add-review/add-review#" className="add-review__form">
           <div className="rating">
             <div className="rating__stars">
-              {ratings.map((rating) => (
+              {RATINGS.map((rating) => (
                 <>
                   <input
                     key={rating}
@@ -72,7 +72,7 @@ function AddReview(): React.FunctionComponent {
                     type="radio"
                     name="rating"
                     value={rating}
-                    defaultChecked={rating === defaultValue}
+                    defaultChecked={rating === RATING_DEFAULT}
                   />
                   <label className="rating__label" htmlFor={`star-${rating}`}>
                     Rating {rating}

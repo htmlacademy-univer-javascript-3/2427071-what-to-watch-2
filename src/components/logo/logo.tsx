@@ -1,15 +1,16 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-type LogoProps = {
-  color?: string;
+type Props = {
+  isLight?: boolean;
 };
 
-export default function Logo({ color = '' }: LogoProps): JSX.Element {
-  const computedStyleClass = `logo__link ${color ? 'logo__link--light' : ''}`;
+function Logo({ isLight = false }: Props): React.FunctionComponent {
+  const computedClass = `logo__link ${isLight ? 'logo__link--light' : ''}`;
 
   return (
     <div className="logo">
-      <Link to="/" className={computedStyleClass}>
+      <Link to="/" className={computedClass}>
         <span className="logo__letter logo__letter--1">W</span>
         <span className="logo__letter logo__letter--2">T</span>
         <span className="logo__letter logo__letter--3">W</span>
@@ -17,3 +18,5 @@ export default function Logo({ color = '' }: LogoProps): JSX.Element {
     </div>
   );
 }
+
+export default Logo;

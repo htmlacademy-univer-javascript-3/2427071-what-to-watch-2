@@ -1,5 +1,6 @@
 import React from 'react';
-import Logo from '../../components/logo/logo';
+import { Link } from 'react-router-dom';
+import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 
 function MoviePageDetails(): React.FunctionComponent {
@@ -14,24 +15,7 @@ function MoviePageDetails(): React.FunctionComponent {
             />
           </div>
           <h1 className="visually-hidden">WTW</h1>
-          <header className="page-header film-card__head">
-            <Logo />
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img
-                    src="img/avatar.jpg"
-                    alt="User avatar"
-                    width={63}
-                    height={63}
-                  />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
-          </header>
+          <Header/>
           <div className="film-card__wrap">
             <div className="film-card__desc">
               <h2 className="film-card__title">The Grand Budapest Hotel</h2>
@@ -59,9 +43,9 @@ function MoviePageDetails(): React.FunctionComponent {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">
+                <Link to="/films/:id/review" className="btn film-card__button">
                   Add review
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -163,9 +147,9 @@ function MoviePageDetails(): React.FunctionComponent {
                 />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
+                <Link className="small-film-card__link" to="/films/:id">
                   Fantastic Beasts: The Crimes of Grindelwald
-                </a>
+                </Link>
               </h3>
             </article>
             <article className="small-film-card catalog__films-card">
@@ -178,9 +162,9 @@ function MoviePageDetails(): React.FunctionComponent {
                 />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
+                <Link className="small-film-card__link" to="/films/:id">
                   Bohemian Rhapsody
-                </a>
+                </Link>
               </h3>
             </article>
             <article className="small-film-card catalog__films-card">
@@ -193,9 +177,9 @@ function MoviePageDetails(): React.FunctionComponent {
                 />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
+                <Link className="small-film-card__link" to="/films/:id">
                   Macbeth
-                </a>
+                </Link>
               </h3>
             </article>
             <article className="small-film-card catalog__films-card">
@@ -208,9 +192,9 @@ function MoviePageDetails(): React.FunctionComponent {
                 />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
+                <Link className="small-film-card__link" to="/films/:id">
                   Aviator
-                </a>
+                </Link>
               </h3>
             </article>
           </div>
