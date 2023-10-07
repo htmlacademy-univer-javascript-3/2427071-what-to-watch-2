@@ -13,7 +13,7 @@ function Card(): React.FunctionComponent {
         />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to="/films:id">
+        <Link className="small-film-card__link" to="/films/:id">
           Fantastic Beasts: The Crimes of Grindelwald
         </Link>
       </h3>

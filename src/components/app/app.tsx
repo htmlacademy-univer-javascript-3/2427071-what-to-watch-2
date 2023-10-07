@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import MainPage from '../../pages/main/main';
+import MainPage from '../../pages/main/main-page';
 import MyList from '../../pages/my-list/my-list';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import AddReview from '../../pages/add-review/add-review';
@@ -8,7 +8,7 @@ import SignIn from '../../pages/login/login';
 import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
 import {AppRoute} from '../../enums/AppRoute';
-import PrivateRoute from '../private-route/PrivateRoute';
+import PrivateRoute from '../private-route/private-route';
 
 interface MainPageProps {
   movieName: string;
