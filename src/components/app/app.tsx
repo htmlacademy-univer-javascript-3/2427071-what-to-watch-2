@@ -7,7 +7,7 @@ import AddReview from '../../pages/add-review/add-review';
 import SignIn from '../../pages/login/login';
 import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
-import {AppRoute} from '../../enums/AppRoute';
+import {AppRoute} from '../../enums/app-route';
 import PrivateRoute from '../private-route/private-route';
 
 interface MainPageProps {

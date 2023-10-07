@@ -1,6 +1,7 @@
 import FilmCardButtons from '../film-card-buttons/film-card-buttons';
 import Header from '../header/header';
 import React from 'react';
+import MovieCardPoster from '../movie-card-poster/movie-card-poster';
 
 type MovieProps = {
   filmName: string;
@@ -21,14 +22,7 @@ function MovieCard({filmName, genre, releaseDate,}: MovieProps): React.FunctionC
       <Header/>
       <div className="film-card__wrap">
         <div className="film-card__info">
-          <div className="film-card__poster">
-            <img
-              src="img/the-grand-budapest-hotel-poster.jpg"
-              alt="The Grand Budapest Hotel poster"
-              width={218}
-              height={327}
-            />
-          </div>
+          <MovieCardPoster/>
           <div className="film-card__desc">
             <h2 className="film-card__title">{filmName}</h2>
             <p className="film-card__meta">

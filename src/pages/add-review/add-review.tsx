@@ -1,6 +1,9 @@
 import React, {Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
+import './add-review.css';
 
 function AddReview(): React.FunctionComponent {
   const RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -26,38 +29,15 @@ function AddReview(): React.FunctionComponent {
                 </Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to="/films:id/review" className="breadcrumbs__link">
+                <Link to="/films/:id/review" className="breadcrumbs__link">
                   Add review
                 </Link>
               </li>
             </ul>
           </nav>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img
-                  src="img/avatar.jpg"
-                  alt="User avatar"
-                  width={63}
-                  height={63}
-                />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to="/" className="user-block__link">
-                Sign out
-              </Link>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
-        <div className="film-card__poster film-card__poster--small">
-          <img
-            src="img/the-grand-budapest-hotel-poster.jpg"
-            alt="The Grand Budapest Hotel poster"
-            width={218}
-            height={327}
-          />
-        </div>
+        <MovieCardPoster size={'small'} />
       </div>
       <div className="add-review">
         <form action="src/pages/add-review/add-review#" className="add-review__form">
