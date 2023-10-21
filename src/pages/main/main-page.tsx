@@ -4,9 +4,9 @@ import MovieCard from '../../components/film-card/movie-card';
 import Catalog from '../../components/catalog/catalog';
 
 interface MainPageProps {
-  movieName: string;
+  filmName: string;
   genre: string;
-  promoDate: string;
+  releaseDate: string;
 }
 
 function MainPage(props: MainPageProps): React.JSX.Element {

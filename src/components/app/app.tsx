@@ -11,9 +11,9 @@ import {AppRoute} from '../../enums/app-route';
 import PrivateRoute from '../private-route/private-route';
 
 interface MainPageProps {
-  movieName: string;
+  filmName: string;
   genre: string;
-  promoDate: string;
+  releaseDate: string;
 }
 
 function App(mainpageprops: MainPageProps): React.JSX.Element {
@@ -25,9 +25,9 @@ function App(mainpageprops: MainPageProps): React.JSX.Element {
             index
             element={
               <MainPage
-                movieName={mainpageprops.movieName}
+                filmName={mainpageprops.filmName}
                 genre={mainpageprops.genre}
-                promoDate={mainpageprops.promoDate}
+                releaseDate={mainpageprops.releaseDate}
               />
             }
           />

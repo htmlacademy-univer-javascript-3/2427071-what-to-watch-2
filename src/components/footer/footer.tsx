@@ -4,7 +4,7 @@ import React from 'react';
 function Footer(): React.JSX.Element {
   return (
     <footer className="page-footer">
-      <Logo color={'dark'} />
+      <Logo isLight={false} />
       <div className="copyright">
         <p>© 2023 What to watch Ltd.</p>
       </div>
