@@ -1,12 +1,29 @@
 import React from 'react';
+import { films as filmsList } from '../../mocks/films';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { AppRoute } from '../../enums/app-route';
 
 function Player(): React.JSX.Element {
+  const { id = '' } = useParams();
+  const film = filmsList.find((f) => f.id === Number(id));
+
+  if (!film) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
   return (
     <div className="player">
-      <video src="src/pages/player/player#" className="player__video" poster="img/player-poster.jpg" />
-      <button type="button" className="player__exit">
+      <video
+        src={film.videoLink}
+        className="player__video"
+        poster={film.posterImage}
+      />
+      <Link
+        type="button"
+        className="player__exit"
+        to={`${AppRoute.Films}/${film.id}`}
+      >
         Exit
-      </button>
+      </Link>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
