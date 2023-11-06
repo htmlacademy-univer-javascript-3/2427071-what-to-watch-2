@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Card(): React.FunctionComponent {
+function Card(): React.JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
@@ -12,9 +13,9 @@ function Card(): React.FunctionComponent {
         />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">
+        <Link className="small-film-card__link" to="/films/:id">
           Fantastic Beasts: The Crimes of Grindelwald
-        </a>
+        </Link>
       </h3>
     </article>
   );
