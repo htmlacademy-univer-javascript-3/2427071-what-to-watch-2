@@ -2,14 +2,13 @@ import FilmCardButtons from '../film-card-buttons/film-card-buttons';
 import Header from '../header/header';
 import React from 'react';
 import MovieCardPoster from '../movie-card-poster/movie-card-poster';
+import { IFilmExtended } from '../../types/film-types';
 
 type MovieProps = {
-  filmName: string;
-  genre: string;
-  releaseDate: string;
+  film: IFilmExtended;
 };
 
-function MovieCard({filmName, genre, releaseDate}: MovieProps): React.JSX.Element {
+function MovieCard({film}: MovieProps): React.JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -22,12 +21,12 @@ function MovieCard({filmName, genre, releaseDate}: MovieProps): React.JSX.Elemen
       <Header/>
       <div className="film-card__wrap">
         <div className="film-card__info">
-          <MovieCardPoster/>
+          <MovieCardPoster src={film.backgroundImage} alt={film.alt} />
           <div className="film-card__desc">
-            <h2 className="film-card__title">{filmName}</h2>
+            <h2 className="film-card__title">{film.name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">{genre}</span>
-              <span className="film-card__year">{releaseDate}</span>
+              <span className="film-card__genre">{film.genre}</span>
+              <span className="film-card__year">{film.released}</span>
             </p>
             <FilmCardButtons/>
           </div>

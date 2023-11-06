@@ -9,14 +9,13 @@ import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
 import {AppRoute} from '../../enums/app-route';
 import PrivateRoute from '../private-route/private-route';
+import { IFilmExtended } from '../../types/film-types';
 
 interface MainPageProps {
-  filmName: string;
-  genre: string;
-  releaseDate: string;
+  films: IFilmExtended[];
 }
 
-function App(mainpageprops: MainPageProps): React.JSX.Element {
+function App({ films }: MainPageProps): React.JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -24,10 +23,7 @@ function App(mainpageprops: MainPageProps): React.JSX.Element {
           <Route
             index
             element={
-              <MainPage
-                filmName={mainpageprops.filmName}
-                genre={mainpageprops.genre}
-                releaseDate={mainpageprops.releaseDate}
+              <MainPage films={films}
               />
             }
           />
@@ -36,22 +32,22 @@ function App(mainpageprops: MainPageProps): React.JSX.Element {
             path={AppRoute.MyList}
             element={
               <PrivateRoute>
-                <MyList/>
+                <MyList films={films}/>
               </PrivateRoute>
             }
           />
           <Route path={AppRoute.Films}>
-            <Route path=":id" element={<MoviePage/>}/>
+            <Route path=":id" element={<MoviePage films={films}/>}/>
             <Route
-              path={AppRoute.Review}
+              path={`:id${AppRoute.Review}`}
               element={
                 <PrivateRoute>
-                  <AddReview/>
+                  <AddReview films={films}/>
                 </PrivateRoute>
               }
             />
           </Route>
-          <Route path={AppRoute.Player} element={<Player/>}/>
+          <Route path={`${AppRoute.Player}/:id`} element={<Player/>}/>
         </Route>
         <Route path="*" element={<PageNotFound/>}/>
       </Routes>

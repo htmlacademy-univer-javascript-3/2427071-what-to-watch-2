@@ -1,13 +1,26 @@
-import React, {Fragment} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
 import './add-review.css';
+import { IFilmExtended } from '../../types/film-types';
+import { AppRoute } from '../../enums/app-route';
 
-function AddReview(): React.JSX.Element {
+type AddReviewProps = {
+  films: IFilmExtended[];
+};
+
+function AddReview({ films }: AddReviewProps): React.JSX.Element {
   const RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const RATING_DEFAULT = 8;
+
+  const { id = '' } = useParams();
+  const film = films.find((f) => f.id === Number(id));
+
+  if (!film) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
 
   return (
     <section className="film-card film-card--full">
@@ -20,16 +33,22 @@ function AddReview(): React.JSX.Element {
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
-          <Logo/>
+          <Logo />
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to="/films:id" className="breadcrumbs__link">
-                  The Grand Budapest Hotel
+                <Link
+                  to={`${AppRoute.Films}/${film.id}`}
+                  className="breadcrumbs__link"
+                >
+                  {film.name}
                 </Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to="/films/:id/review" className="breadcrumbs__link">
+                <Link
+                  to={`${AppRoute.Films}/${film.id}${AppRoute.Review}`}
+                  className="breadcrumbs__link"
+                >
                   Add review
                 </Link>
               </li>
@@ -37,7 +56,8 @@ function AddReview(): React.JSX.Element {
           </nav>
           <UserBlock />
         </header>
-        <MovieCardPoster size={'small'} />
+        <MovieCardPoster size={'small'} src={film.backgroundImage}
+          alt={film.alt} />
       </div>
       <div className="add-review">
         <form action="src/pages/add-review/add-review#" className="add-review__form">
