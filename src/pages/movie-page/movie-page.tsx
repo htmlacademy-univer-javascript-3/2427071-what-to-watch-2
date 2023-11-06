@@ -1,11 +1,25 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
 import Card from '../../components/card/card';
+import { IFilmExtended } from '../../types/film-types';
+import { AppRoute } from '../../enums/app-route';
 
-function MoviePage(): React.JSX.Element {
+type MoviePageProps = {
+  films: IFilmExtended[];
+};
+
+function MoviePage({ films }: MoviePageProps): React.JSX.Element {
+
+  const { id = '' } = useParams();
+  const film = films.find((f) => f.id === Number(id));
+
+  if (!film) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -17,13 +31,13 @@ function MoviePage(): React.JSX.Element {
             />
           </div>
           <h1 className="visually-hidden">WTW</h1>
-          <Header/>
+          <Header />
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{film.genre}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
               <div className="film-card__buttons">
                 <button
@@ -31,7 +45,7 @@ function MoviePage(): React.JSX.Element {
                   type="button"
                 >
                   <svg viewBox="0 0 19 19" width={19} height={19}>
-                    <use xlinkHref="#play-s"/>
+                    <use xlinkHref="#play-s" />
                   </svg>
                   <span>Play</span>
                 </button>
@@ -40,12 +54,15 @@ function MoviePage(): React.JSX.Element {
                   type="button"
                 >
                   <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add"/>
+                    <use xlinkHref="#add" />
                   </svg>
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to="/films/:id/review" className="btn film-card__button">
+                <Link
+                  to={`${AppRoute.Films}/${film.id}${AppRoute.Review}`}
+                  className="btn film-card__button"
+                >
                   Add review
                 </Link>
               </div>
@@ -54,7 +71,7 @@ function MoviePage(): React.JSX.Element {
         </div>
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
-            <MovieCardPoster/>
+            <MovieCardPoster src={film.backgroundImage} alt={film.alt} />
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
@@ -76,34 +93,19 @@ function MoviePage(): React.JSX.Element {
                 </ul>
               </nav>
               <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
+                <div className="film-rating__score">{film.rating}</div>
                 <p className="film-rating__meta">
                   <span className="film-rating__level">Very good</span>
                   <span className="film-rating__count">240 ratings</span>
                 </p>
               </div>
               <div className="film-card__text">
-                <p>
-                  In the 1930s, the Grand Budapest Hotel is a popular European
-                  ski resort, presided over by concierge Gustave H. (Ralph
-                  Fiennes). Zero, a junior lobby boy, becomes Gustave`s friend
-                  and protege.
-                </p>
-                <p>
-                  Gustave prides himself on providing first-class service to the
-                  hotel`s guests, including satisfying the sexual needs of the
-                  many elderly women who stay there. When one of Gustave`s
-                  lovers dies mysteriously, Gustave finds himself the recipient
-                  of a priceless painting and the chief suspect in her murder.
-                </p>
+                <p>{film.description}</p>
                 <p className="film-card__director">
-                  <strong>Director: Wes Anderson</strong>
+                <strong>Director: {film.director}</strong>
                 </p>
                 <p className="film-card__starring">
-                  <strong>
-                    Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe
-                    and other
-                  </strong>
+                <strong>Starring:{film.starring.join(', ')}</strong>
                 </p>
               </div>
             </div>
@@ -114,12 +116,12 @@ function MoviePage(): React.JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
-            {Array.from({length: 4}, (_, index) => (
-              <Card key={index}/>
+            {Array.from({ length: 4 }, (_, index) => (
+              <Card key={index} film={film}/>
             ))}
           </div>
         </section>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

@@ -2,19 +2,18 @@ import React from 'react';
 import Footer from '../../components/footer/footer';
 import MovieCard from '../../components/film-card/movie-card';
 import Catalog from '../../components/catalog/catalog';
+import { IFilmExtended } from '../../types/film-types';
 
 interface MainPageProps {
-  filmName: string;
-  genre: string;
-  releaseDate: string;
+  films: IFilmExtended[];
 }
 
-function MainPage(props: MainPageProps): React.JSX.Element {
+function MainPage({ films }: MainPageProps): React.JSX.Element {
   return (
     <>
-      <MovieCard {...props} />
+      <MovieCard film={films[0]} />
       <div className="page-content">
-        <Catalog/>
+        <Catalog films={films}/>
         <Footer/>
       </div>
     </>
