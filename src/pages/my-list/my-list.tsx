@@ -4,6 +4,7 @@ import Footer from '../../components/footer/footer';
 import UserBlock from '../../components/user-block/user-block';
 import Card from '../../components/card/card';
 import { IFilmExtended } from '../../types/film-types';
+import FilmsList from '../../components/films-list/films-list';
 
 type MyListProps = {
   films: IFilmExtended[];
@@ -21,11 +22,7 @@ function MyList({films}: MyListProps): React.JSX.Element {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <div className="catalog__films-list">
-        {films.map((film) => (
-            <Card film={film} key={film.name} />
-          ))}
-        </div>
+        <FilmsList films={films} />
       </section>
       <Footer/>
     </div>

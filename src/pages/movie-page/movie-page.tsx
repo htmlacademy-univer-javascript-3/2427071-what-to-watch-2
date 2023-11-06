@@ -6,6 +6,7 @@ import MovieCardPoster from '../../components/movie-card-poster/movie-card-poste
 import Card from '../../components/card/card';
 import { IFilmExtended } from '../../types/film-types';
 import { AppRoute } from '../../enums/app-route';
+import FilmsList from '../../components/films-list/films-list';
 
 type MoviePageProps = {
   films: IFilmExtended[];
@@ -115,11 +116,7 @@ function MoviePage({ films }: MoviePageProps): React.JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <div className="catalog__films-list">
-            {Array.from({ length: 4 }, (_, index) => (
-              <Card key={index} film={film}/>
-            ))}
-          </div>
+          <FilmsList films={films} />
         </section>
         <Footer />
       </div>
