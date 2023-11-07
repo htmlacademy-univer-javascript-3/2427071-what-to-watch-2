@@ -2,7 +2,6 @@ import React from 'react';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import UserBlock from '../../components/user-block/user-block';
-import Card from '../../components/card/card';
 import { IFilmExtended } from '../../types/film-types';
 import FilmsList from '../../components/films-list/films-list';
 

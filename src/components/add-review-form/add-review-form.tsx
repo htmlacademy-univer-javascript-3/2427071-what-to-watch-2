@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, Fragment, useState } from 'react';
+import React, {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 
 type ReviewFormProps = {
   onSubmit: () => void;
@@ -6,16 +6,14 @@ type ReviewFormProps = {
 
 
 const DEFAULT_FORM_VALUE = {
-    id: '',
-    comment: '',
-    user: 'Kate Muir',
-    date: new Date(),
-    rating: 7.2,
-  };
+  id: '',
+  comment: '',
+  user: 'Kate Muir',
+  date: new Date(),
+  rating: 7.2,
+};
 
-export default function AddReviewForm({
-  onSubmit,
-}: ReviewFormProps): React.JSX.Element {
+export default function AddReviewForm({onSubmit,}: ReviewFormProps): React.JSX.Element {
   const RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const [review, setReview] = useState({

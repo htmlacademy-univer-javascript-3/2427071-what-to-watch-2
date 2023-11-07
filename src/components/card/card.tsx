@@ -14,7 +14,7 @@ type CardProps = {
 
 function Card({ film, isActive = false, isMuted = true, onMouseEnter, onMouseLeave }: CardProps): React.JSX.Element {
   const { name, posterImage, alt, id, videoLink, backgroundImage } = film;
-  
+
   const handleMouseEnter = useCallback(() => {
     onMouseEnter(id);
   }, [id, onMouseEnter]);
@@ -27,7 +27,7 @@ function Card({ film, isActive = false, isMuted = true, onMouseEnter, onMouseLea
       data-active={isActive}
     >
       <div className="small-film-card__image">
-      {isActive ? (
+        {isActive ? (
           <VideoPlayer
             link={videoLink}
             posterImage={backgroundImage}

@@ -26,7 +26,7 @@ export default function FilmsList({
 
   const filteredItems = genre
     ? films.filter((film) => film.genre === genre)
-    : films
+    : films;
 
   return (
     <div className="catalog__films-list">
