@@ -13,7 +13,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App films={defaultProps.films}
-    />
+    <App films={defaultProps.films}/>
   </React.StrictMode>
 );

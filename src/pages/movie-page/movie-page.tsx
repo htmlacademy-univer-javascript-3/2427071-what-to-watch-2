@@ -3,7 +3,6 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
-import Card from '../../components/card/card';
 import { IFilmExtended } from '../../types/film-types';
 import { AppRoute } from '../../enums/app-route';
 import FilmsList from '../../components/films-list/films-list';

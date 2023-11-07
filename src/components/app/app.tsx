@@ -9,13 +9,13 @@ import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
 import {AppRoute} from '../../enums/app-route';
 import PrivateRoute from '../private-route/private-route';
-import { IFilmExtended } from '../../types/film-types';
+import {IFilmExtended} from '../../types/film-types';
 
 interface MainPageProps {
   films: IFilmExtended[];
 }
 
-function App({ films }: MainPageProps): React.JSX.Element {
+function App({films}: MainPageProps): React.JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -23,8 +23,7 @@ function App({ films }: MainPageProps): React.JSX.Element {
           <Route
             index
             element={
-              <MainPage films={films}
-              />
+              <MainPage films={films}/>
             }
           />
           <Route path={AppRoute.Login} element={<SignIn/>}/>
