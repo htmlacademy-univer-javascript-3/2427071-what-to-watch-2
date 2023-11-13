@@ -1,5 +1,12 @@
-import {createAction} from '@reduxjs/toolkit';
+import { createAction, PayloadAction } from '@reduxjs/toolkit';
 
-export const setActiveGenre = createAction<{genre: string}>('setActiveGenre');
+export interface SetActiveGenrePayload {
+  genre: string;
+}
+
+export const setActiveGenre = createAction<SetActiveGenrePayload>('setActiveGenre');
 
 export const getFilmsByGenre = createAction('getFilmsByGenre');
+
+export type SetActiveGenreAction = PayloadAction<SetActiveGenrePayload>;
+export type GetFilmsByGenreAction = ReturnType<typeof getFilmsByGenre>;
