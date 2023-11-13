@@ -5,16 +5,19 @@ import Details from './details.tsx';
 import Reviews from './reviews.tsx';
 import { reviewsInfo } from '../../mocks/reviews.ts';
 
-const TABS = ['Overview', 'Details', 'Reviews'];
+const TABS = ['Overview', 'Details', 'Reviews'] as const;
+
+type Tab = typeof TABS[number];
 
 type TabsProps = {
   film: IFilmExtended;
 };
+
 export default function Tabs({ film }: TabsProps): React.JSX.Element {
-  const [activeTab, setActiveTab] = useState(TABS[0]);
+  const [activeTab, setActiveTab] = useState<Tab>(TABS[0]);
 
   const handleSetActiveTab = useCallback(
-    (tab: string) => () => {
+    (tab: Tab) => () => {
       setActiveTab(tab);
     },
     []
@@ -26,11 +29,11 @@ export default function Tabs({ film }: TabsProps): React.JSX.Element {
 
   const component = useMemo(() => {
     switch (activeTab) {
-      case TABS[0]:
+      case 'Overview':
         return <Overview film={film} />;
-      case TABS[1]:
+      case 'Details':
         return <Details film={film} />;
-      case TABS[2]:
+      case 'Reviews':
         return <Reviews reviews={reviewsInfo} />;
       default:
         return null;
