@@ -5,5 +5,5 @@ export const enum AppRoute {
   Films = '/films',
   Review = ':id/review',
   Player = '/player/:id',
-  NotFound = "NotFound"
+  NotFound = 'NotFound'
 }

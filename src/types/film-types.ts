@@ -4,8 +4,8 @@ export interface IFilm {
     posterImage: string;
     alt: string;
   }
-  
-  export interface IFilmExtended extends IFilm {
+
+export interface IFilmExtended extends IFilm {
     backgroundImage: string;
     backgroundColor: string;
     videoLink: string;
