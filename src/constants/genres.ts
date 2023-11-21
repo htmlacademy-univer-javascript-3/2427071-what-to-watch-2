@@ -10,3 +10,5 @@ export const GENRES = [
   { id: 9, isActive: false, name: 'Sci-Fi' },
   { id: 10, isActive: false, name: 'Thrillers' },
 ];
+
+export const ALL_GENRES = 'All genres';
