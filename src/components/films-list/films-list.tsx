@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import Card from '../../components/card/card';
-import { IFilmExtended } from '../../types/film-types';
-import { films as filmsList } from '../../mocks/films';
+import { DEFAULT_FILM_LIST_LENGTH } from '../../constants/film-list';
+import { useAppSelector } from '../../hooks/store';
 
 type FilmsListProps = {
-  films: IFilmExtended[];
-  length?: number;
+  length: number;
   genre?: string;
 };
 
 export default function FilmsList({
-  films = filmsList,
-  length = filmsList.length,
+  length = DEFAULT_FILM_LIST_LENGTH,
   genre,
 }: FilmsListProps): React.JSX.Element {
   const [activeFilm, setActiveFilm] = useState<number | null>(null);
+  const films = useAppSelector((state) => state.films);
 
   const handleCardHover = (id: number) => {
     setActiveFilm(id);

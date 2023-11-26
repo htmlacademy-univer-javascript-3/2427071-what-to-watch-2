@@ -1,23 +1,30 @@
-import React from 'react';
 import GenresList from '../genre-list/genre-list';
-import { IFilmExtended } from '../../types/film-types';
 import FilmsList from '../films-list/films-list';
+import React, { useCallback, useState } from 'react';
+import { DEFAULT_FILM_LIST_LENGTH } from '../../constants/film-list.ts';
+import { useAppSelector } from '../../hooks/store.ts';
 
-type CatalogProps = {
-  films: IFilmExtended[];
-};
+function Catalog(): React.JSX.Element {
+  const stateGenreFilms = useAppSelector((state) => state.genreFilms);
 
-function Catalog({ films }: CatalogProps): React.JSX.Element {
+  const [listLength, setListLength] = useState(DEFAULT_FILM_LIST_LENGTH);
+  const isButtonVisible = stateGenreFilms.length >= listLength;
+
+  const handleClick = useCallback(()=>{
+    setListLength((prev) => prev + DEFAULT_FILM_LIST_LENGTH);
+  },[]);
+
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
       <GenresList />
-      <FilmsList films={films} />
-      <div className="catalog__more">
-        <button className="catalog__button" type="button">
-          Show more
-        </button>
-      </div>
+      <FilmsList length={listLength}/>
+      {isButtonVisible && (
+        <div className="catalog__more">
+          <button className="catalog__button" type="button" onClick={handleClick}>
+            Show more
+          </button>
+        </div>)}
     </section>
   );
 }
