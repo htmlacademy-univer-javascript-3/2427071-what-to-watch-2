@@ -8,6 +8,7 @@ import { AppRoute } from '../../enums/app-route';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFilmByIdAction} from '../../store/api-actions.ts';
+import {Spinner} from '../../components/spinner/spinner.tsx';
 
 export default function AddReview(): React.JSX.Element {
   const { id = '' } = useParams();
@@ -21,6 +22,10 @@ export default function AddReview(): React.JSX.Element {
       dispatch(fetchFilmByIdAction(id));
     }
   }, [id, dispatch]);
+
+  if (isLoading && !film) {
+    return <Spinner />;
+  }
 
   if (!film) {
     return <Navigate to={AppRoute.NotFound} />;

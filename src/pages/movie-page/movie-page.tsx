@@ -8,18 +8,24 @@ import FilmsList from '../../components/films-list/films-list';
 import Tabs from '../../components/tabs/tabs';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFilmByIdAction} from '../../store/api-actions.ts';
+import {Spinner} from '../../components/spinner/spinner.tsx';
 
 function MoviePage(): React.JSX.Element {
   const { id = '' } = useParams();
 
   const dispatch = useAppDispatch();
   const film = useAppSelector((state) => state.currentFilm);
+  const isLoading = useAppSelector((state) => state.isLoadingFilm);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchFilmByIdAction(id));
     }
   }, [id, dispatch]);
+
+  if (isLoading && !film) {
+    return <Spinner />;
+  }
 
   if (!film) {
     return <Navigate to={AppRoute.NotFound} />;
