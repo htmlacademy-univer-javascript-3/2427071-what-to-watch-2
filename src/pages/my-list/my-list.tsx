@@ -2,11 +2,11 @@ import React from 'react';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import UserBlock from '../../components/user-block/user-block';
-import { IFilmExtended } from '../../types/film-types';
+import {IFilm} from '../../types/film-types';
 import FilmsList from '../../components/films-list/films-list';
 
 type MyListProps = {
-  films: IFilmExtended[];
+  films: IFilm[];
 };
 
 function MyList({films}: MyListProps): React.JSX.Element {
@@ -21,7 +21,7 @@ function MyList({films}: MyListProps): React.JSX.Element {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <FilmsList films={films} />
+        <FilmsList />
       </section>
       <Footer/>
     </div>

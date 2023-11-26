@@ -1,23 +1,26 @@
-/* eslint-disable no-console */
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import './add-review.css';
-import { IFilmExtended } from '../../types/film-types';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import { AppRoute } from '../../enums/app-route';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
+import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
+import {fetchFilmByIdAction} from '../../store/api-actions.ts';
 
-type AddReviewProps = {
-  films: IFilmExtended[];
-};
-
-export default function AddReview({
-  films,
-}: AddReviewProps): React.JSX.Element {
+export default function AddReview(): React.JSX.Element {
   const { id = '' } = useParams();
-  const film = films.find((f) => f.id === Number(id));
+
+  const dispatch = useAppDispatch();
+  const film = useAppSelector((state) => state.currentFilm);
+  const isLoading = useAppSelector((state) => state.isLoadingFilm);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchFilmByIdAction(id));
+    }
+  }, [id, dispatch]);
 
   if (!film) {
     return <Navigate to={AppRoute.NotFound} />;
@@ -28,8 +31,8 @@ export default function AddReview({
       <div className="film-card__header">
         <div className="film-card__bg">
           <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
+            src={film.backgroundImage}
+            alt={film.name}
           />
         </div>
         <h1 className="visually-hidden">WTW</h1>
@@ -60,7 +63,7 @@ export default function AddReview({
         <MovieCardPoster
           size={'small'}
           src={film.backgroundImage}
-          alt={film.alt}
+          alt={film.name}
         />
       </div>
       <AddReviewForm onSubmit={() => console.log('what?')} />

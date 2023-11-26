@@ -1,21 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
-import { IFilmExtended } from '../../types/film-types';
 import { AppRoute } from '../../enums/app-route';
 import FilmsList from '../../components/films-list/films-list';
 import Tabs from '../../components/tabs/tabs';
+import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
+import {fetchFilmByIdAction} from '../../store/api-actions.ts';
 
-type MoviePageProps = {
-  films: IFilmExtended[];
-};
-
-function MoviePage({ films }: MoviePageProps): React.JSX.Element {
-
+function MoviePage(): React.JSX.Element {
   const { id = '' } = useParams();
-  const film = films.find((f) => f.id === Number(id));
+
+  const dispatch = useAppDispatch();
+  const film = useAppSelector((state) => state.currentFilm);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchFilmByIdAction(id));
+    }
+  }, [id, dispatch]);
 
   if (!film) {
     return <Navigate to={AppRoute.NotFound} />;
@@ -26,10 +30,7 @@ function MoviePage({ films }: MoviePageProps): React.JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel"
-            />
+            <img src={film.posterImage} alt={film.name} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <Header />
@@ -72,7 +73,7 @@ function MoviePage({ films }: MoviePageProps): React.JSX.Element {
         </div>
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
-            <MovieCardPoster src={film.backgroundImage} alt={film.alt} />
+            <MovieCardPoster src={film.backgroundImage} alt={film.name} />
             <Tabs film={film} />
           </div>
         </div>

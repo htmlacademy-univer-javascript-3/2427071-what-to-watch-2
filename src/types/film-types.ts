@@ -1,21 +1,29 @@
 export interface IFilm {
-    id: number;
-    name: string;
-    posterImage: string;
-    alt: string;
-  }
+  id: number;
+  name: string;
+  previewImage: string;
+  previewVideoLink: string;
+  genre: string;
+  alt?: string;
+}
 
-export interface IFilmExtended extends IFilm {
-    backgroundImage: string;
-    backgroundColor: string;
-    videoLink: string;
-    description: string;
-    rating: number;
-    scoresCount: number;
-    director: string;
-    starring: [string];
-    runTime: number;
-    genre: string;
-    released: number;
-    isFavorite: boolean;
+export interface IFilmPromo {
+  id: string;
+  name: string;
+  posterImage: string;
+  backgroundImage: string;
+  videoLink: string;
+  genre: string;
+  released: number;
+  isFavorite: boolean;
+}
+
+export interface IFilmExtended extends IFilmPromo {
+  backgroundColor: string;
+  description: string;
+  rating: number;
+  scoresCount: number;
+  director: string;
+  starring: [string];
+  runTime: number;
   }
