@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import Card from '../../components/card/card';
 import { DEFAULT_FILM_LIST_LENGTH } from '../../constants/film-list';
 import { useAppSelector } from '../../hooks/store';
+import {Spinner} from "../spinner/spinner.tsx";
 
 type FilmsListProps = {
-  length: number;
+  length?: number;
   genre?: string;
 };
 
@@ -14,6 +15,7 @@ export default function FilmsList({
 }: FilmsListProps): React.JSX.Element {
   const [activeFilm, setActiveFilm] = useState<number | null>(null);
   const films = useAppSelector((state) => state.films);
+  const isLoading = useAppSelector((state) => state.isLoadingFilms);
 
   const handleCardHover = (id: number) => {
     setActiveFilm(id);
@@ -29,7 +31,9 @@ export default function FilmsList({
 
   return (
     <div className="catalog__films-list">
-      {filteredItems.slice(0, length).map((film) => (
+      { isLoading ? (
+        <Spinner />
+      ) : (filteredItems.slice(0, length).map((film) => (
         <Card
           film={film}
           key={film.name}
@@ -37,7 +41,7 @@ export default function FilmsList({
           onMouseEnter={handleCardHover}
           onMouseLeave={handleCardLeave}
         />
-      ))}
+      )))}
     </div>
   );
 }

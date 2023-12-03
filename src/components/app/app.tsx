@@ -9,13 +9,11 @@ import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
 import {AppRoute} from '../../enums/app-route';
 import PrivateRoute from '../private-route/private-route';
-import {IFilmExtended} from '../../types/film-types';
+import {useAppSelector} from '../../hooks/store.ts';
 
-interface MainPageProps {
-  films: IFilmExtended[];
-}
+function App(): React.JSX.Element {
+  const films = useAppSelector((state) => state.films);
 
-function App({films}: MainPageProps): React.JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -36,12 +34,12 @@ function App({films}: MainPageProps): React.JSX.Element {
             }
           />
           <Route path={AppRoute.Films}>
-            <Route path=":id" element={<MoviePage films={films}/>}/>
+            <Route path=":id" element={<MoviePage />}/>
             <Route
               path={`:id${AppRoute.Review}`}
               element={
                 <PrivateRoute>
-                  <AddReview films={films}/>
+                  <AddReview />
                 </PrivateRoute>
               }
             />
