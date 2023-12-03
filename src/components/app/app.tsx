@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import MainPage from '../../pages/main/main-page';
 import MyList from '../../pages/my-list/my-list';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
@@ -10,18 +10,20 @@ import Player from '../../pages/player/player';
 import {AppRoute} from '../../enums/app-route';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../hooks/store.ts';
+import HistoryRouter from '../history-router/history-router.tsx';
+import browserHistory from '../../browser-history.ts';
 
 function App(): React.JSX.Element {
   const films = useAppSelector((state) => state.films);
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main}>
           <Route
             index
             element={
-              <MainPage films={films}/>
+              <MainPage />
             }
           />
           <Route path={AppRoute.Login} element={<SignIn/>}/>
@@ -48,7 +50,7 @@ function App(): React.JSX.Element {
         </Route>
         <Route path="*" element={<PageNotFound/>}/>
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

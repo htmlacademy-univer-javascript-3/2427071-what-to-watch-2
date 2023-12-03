@@ -1,15 +1,21 @@
-import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { ALL_GENRES } from '../constants/genres.ts';
+import {createReducer, PayloadAction} from '@reduxjs/toolkit';
+import {ALL_GENRES} from '../constants/genres.ts';
 import {
   fetchFavoriteFilms,
   fetchFilmById,
   fetchFilmReviews,
-  fetchFilms, fetchPromoFilm, fetchSimilarFilms,
+  fetchFilms,
+  fetchPromoFilm,
+  fetchSimilarFilms,
   getFilmsByGenre,
-  setActiveGenre, setIsLoadingFilm, setIsLoadingFilms
+  setActiveGenre,
+  setAuthStatus,
+  setIsLoadingFilm,
+  setIsLoadingFilms
 } from './action.ts';
 import {IFilm, IFilmExtended, IFilmPromo} from '../types/film-types';
 import {IReview} from '../types/review-types.ts';
+import {AuthStatus} from '../enums/auth-status.ts';
 
 interface State {
   films: IFilm[];
@@ -22,6 +28,7 @@ interface State {
   favoriteFilms: IFilm[];
   reviews: IReview[];
   similarFilms: IFilm[];
+  authStatus: AuthStatus;
 }
 
 const initialState: State = {
@@ -35,6 +42,7 @@ const initialState: State = {
   favoriteFilms: [],
   reviews: [],
   similarFilms: [],
+  authStatus: AuthStatus.Unknown,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -72,5 +80,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setIsLoadingFilm, (state, action) => {
       state.isLoadingFilm = action.payload;
+    })
+    .addCase(setAuthStatus, (state, action) => {
+      state.authStatus = action.payload;
     });
 });
