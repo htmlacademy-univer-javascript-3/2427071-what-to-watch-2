@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import {store} from './store';
 import {checkAuthStatus, fetchFilmsAction} from './store/api-actions.ts';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(fetchFilmsAction());
 store.dispatch(checkAuthStatus());
@@ -16,6 +18,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
+      <ToastContainer />
     </Provider>
   </React.StrictMode>
 );
