@@ -1,8 +1,42 @@
-import React from 'react';
+import React, {FormEvent, useRef, useState} from 'react';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
+import {EMAIL_PATTERN, PASSWORD_PATTERN} from '../../constants/validation-patterns.ts';
+import {useAppDispatch} from '../../hooks/store.ts';
+import {loginAction} from '../../store/api-actions.ts';
 
 function Login(): React.JSX.Element {
+  const [error, setError] = useState('');
+  const dispatch = useAppDispatch();
+
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (emailRef.current !== null && passwordRef.current !== null) {
+      if (!EMAIL_PATTERN.test(emailRef.current?.value)) {
+        setError('Please enter a valid email address');
+        return;
+      }
+
+      if (!PASSWORD_PATTERN.test(passwordRef.current?.value)) {
+        setError(
+          'Passwords must contain: a minimum of 1 letter and a minimum of 1 numeric character'
+        );
+        return;
+      }
+
+      dispatch(
+        loginAction({
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+        })
+      );
+    }
+  };
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -10,10 +44,27 @@ function Login(): React.JSX.Element {
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="src/pages/login/login#" className="sign-in__form">
+        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+          {error && (
+            <div className="sign-in__message">
+              <p>{error}</p>
+            </div>
+          )}
+          {/* Для дальнейшей разработки страницы
+          <div className="sign-in__message">
+            <p>
+              We can’t recognize this email <br /> and password combination.
+              Please try again.
+            </p>
+          </div>*/}
           <div className="sign-in__fields">
-            <div className="sign-in__field">
+            <div
+              className={`sign-in__field ${
+                error ? 'sign-in__field--error' : ''
+              }`}
+            >
               <input
+                ref={emailRef}
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
@@ -27,8 +78,13 @@ function Login(): React.JSX.Element {
                 Email address
               </label>
             </div>
-            <div className="sign-in__field">
+            <div
+              className={`sign-in__field ${
+                error ? 'sign-in__field--error' : ''
+              }`}
+            >
               <input
+                ref={passwordRef}
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"

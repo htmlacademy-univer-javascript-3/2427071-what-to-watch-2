@@ -13,9 +13,9 @@ import {
 import {IReview} from '../types/review-types.ts';
 import {ALL_GENRES} from '../constants/genres.ts';
 import {AuthStatus} from '../enums/auth-status.ts';
-import {removeToken, setToken} from "../services/token.ts";
-import {AppRoute} from "../enums/app-route.ts";
-import {AuthData, UserData} from "../types/auth.ts";
+import {removeToken, setToken} from '../services/token.ts';
+import {AppRoute} from '../enums/app-route.ts';
+import {AuthData, UserData} from '../types/auth.ts';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
