@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from '../../components/card/card';
 import { DEFAULT_FILM_LIST_LENGTH } from '../../constants/film-list';
 import { useAppSelector } from '../../hooks/store';
-import {Spinner} from "../spinner/spinner.tsx";
+import {Spinner} from '../spinner/spinner.tsx';
 
 type FilmsListProps = {
   length?: number;

@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 import {IFilm, IFilmExtended, IFilmPromo} from '../types/film-types.ts';
 import {IReview} from '../types/review-types.ts';
-import {AuthStatus} from "../enums/auth-status.ts";
-import {AppRoute} from "../enums/app-route.ts";
+import {AuthStatus} from '../enums/auth-status.ts';
+import {AppRoute} from '../enums/app-route.ts';
 
 
 export const setActiveGenre = createAction<{genre: string}>('setActiveGenre');

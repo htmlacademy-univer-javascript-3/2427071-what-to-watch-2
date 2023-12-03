@@ -1,5 +1,5 @@
 import { RotatingLines } from 'react-loader-spinner';
-import React from "react";
+import React from 'react';
 
 export function Spinner(): React.JSX.Element {
   return (
