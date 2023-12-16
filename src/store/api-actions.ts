@@ -10,7 +10,7 @@ import {
   setActiveGenre, setAuthStatus,
   setIsLoadingFilm, setIsLoadingFilms,
 } from './action.ts';
-import {IReview} from '../types/review-types.ts';
+import {AddUserReview, IReview, UserReview} from '../types/review-types.ts';
 import {ALL_GENRES} from '../constants/genres.ts';
 import {AuthStatus} from '../enums/auth-status.ts';
 import {removeToken, setToken} from '../services/token.ts';
@@ -207,6 +207,22 @@ export const logoutAction = createAsyncThunk<
       dispatch(setAuthStatus(AuthStatus.NoAuth));
     } catch (e) {
       dispatch(setAuthStatus(AuthStatus.Unknown));
+    }
+  },
+);
+
+export const addCommentAction = createAsyncThunk<void, AddUserReview, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'addCommentAction',
+  async ({filmId, comment, rating}, {dispatch, extra: api}) => {
+    try {
+      await api.post<UserReview>(`comments/${filmId}`, {comment, rating});
+      dispatch(redirectToRoute(`${AppRoute.Films}/${filmId}`));
+    } catch (e) {
+      console.error(e);
     }
   },
 );

@@ -1,7 +1,11 @@
-import React, {ChangeEvent, FormEvent, Fragment, useState} from 'react';
+import React, {ChangeEvent, FormEvent, Fragment, useCallback, useState} from 'react';
+import {useAppDispatch} from '../../hooks/store.ts';
+import {addCommentAction} from '../../store/api-actions.ts';
+import {Navigate} from 'react-router-dom';
+import {AppRoute} from '../../enums/app-route.ts';
 
 type ReviewFormProps = {
-  onSubmit: () => void;
+  filmId: string;
 };
 
 
@@ -13,7 +17,8 @@ const DEFAULT_FORM_VALUE = {
   rating: 7.2,
 };
 
-export default function AddReviewForm({onSubmit,}: ReviewFormProps): React.JSX.Element {
+export default function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
+  const dispatch = useAppDispatch();
   const RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const [review, setReview] = useState({
@@ -34,9 +39,25 @@ export default function AddReviewForm({onSubmit,}: ReviewFormProps): React.JSX.E
     });
   }
 
+  const handleSubmit = useCallback(
+    (evt: FormEvent<HTMLFormElement>) => {
+      evt.preventDefault();
+
+      dispatch(addCommentAction({
+        filmId: filmId,
+        comment: review.comment,
+        rating: review.rating
+      }));
+    },
+    []);
+
+  if (!filmId) {
+    return <Navigate to={AppRoute.NotFound} />;
+  }
+
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form">
+      <form action="#" className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
           <div className="rating__stars">
             {RATINGS.map((rating) => (
@@ -70,10 +91,6 @@ export default function AddReviewForm({onSubmit,}: ReviewFormProps): React.JSX.E
             <button
               className="add-review__btn"
               type="submit"
-              onSubmit={(evt: FormEvent<HTMLButtonElement>) => {
-                evt.preventDefault();
-                onSubmit();
-              }}
             >
               Post
             </button>
