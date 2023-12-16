@@ -21,7 +21,7 @@ function MyList({films}: MyListProps): React.JSX.Element {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <FilmsList />
+        <FilmsList similarFilms={films}/>
       </section>
       <Footer/>
     </div>

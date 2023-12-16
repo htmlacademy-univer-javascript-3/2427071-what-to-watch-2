@@ -3,18 +3,10 @@ import {useAppDispatch} from '../../hooks/store.ts';
 import {addCommentAction} from '../../store/api-actions.ts';
 import {Navigate} from 'react-router-dom';
 import {AppRoute} from '../../enums/app-route.ts';
+import {DEFAULT_FORM_VALUE} from '../../constants/default-form-value.ts';
 
 type ReviewFormProps = {
   filmId: string;
-};
-
-
-const DEFAULT_FORM_VALUE = {
-  id: '',
-  comment: '',
-  user: 'Kate Muir',
-  date: new Date(),
-  rating: 7.2,
 };
 
 export default function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {

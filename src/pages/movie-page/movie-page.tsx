@@ -94,7 +94,7 @@ function MoviePage(): React.JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList length={4} genre={film.genre} />
+          <FilmsList length={4} />
         </section>
         <Footer />
       </div>

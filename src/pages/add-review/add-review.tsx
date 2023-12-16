@@ -71,7 +71,7 @@ export default function AddReview(): React.JSX.Element {
           alt={film.name}
         />
       </div>
-      <AddReviewForm onSubmit={() => console.log('what?')} />
+      <AddReviewForm filmId={film.id} />
     </section>
   );
 }
