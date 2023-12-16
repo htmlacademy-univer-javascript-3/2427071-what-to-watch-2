@@ -18,4 +18,6 @@ function GenreItem({name, isActive}: GenreItemProps): React.JSX.Element {
   );
 }
 
-export default GenreItem;
+const GenreItemMemo = React.memo(GenreItem);
+
+export default GenreItemMemo;

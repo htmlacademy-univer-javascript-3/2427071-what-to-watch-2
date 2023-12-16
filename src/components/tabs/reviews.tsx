@@ -26,7 +26,7 @@ function Review({ review }: ReviewProps): React.JSX.Element {
     </div>
   );
 }
-export default function FilmReviews({
+function FilmReviews({
   reviews = reviewsInfo,
 }: ReviewsProps): React.JSX.Element {
   return (
@@ -44,3 +44,7 @@ export default function FilmReviews({
     </div>
   );
 }
+
+const FilmReviewsMemo = React.memo(FilmReviews);
+
+export default FilmReviewsMemo;

@@ -4,7 +4,7 @@ import { IFilmExtended } from '../../types/film-types.ts';
 type OverviewProps = {
   film: IFilmExtended;
 };
-export default function Overview({ film }: OverviewProps): React.JSX.Element {
+function Overview({ film }: OverviewProps): React.JSX.Element {
   return (
     <>
       <div className="film-rating">
@@ -26,3 +26,7 @@ export default function Overview({ film }: OverviewProps): React.JSX.Element {
     </>
   );
 }
+
+const OverviewMemo = React.memo(Overview);
+
+export default OverviewMemo;

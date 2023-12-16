@@ -13,7 +13,7 @@ type TabsProps = {
   film: IFilmExtended;
 };
 
-export default function Tabs({ film }: TabsProps): React.JSX.Element {
+function Tabs({ film }: TabsProps): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<Tab>(TABS[0]);
 
   const handleSetActiveTab = useCallback(
@@ -62,3 +62,7 @@ export default function Tabs({ film }: TabsProps): React.JSX.Element {
     </div>
   );
 }
+
+const TabsMemo = React.memo(Tabs);
+
+export default TabsMemo;

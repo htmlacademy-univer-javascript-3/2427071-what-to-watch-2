@@ -19,4 +19,6 @@ function Logo({ isLight = false }: Props): React.JSX.Element {
   );
 }
 
-export default Logo;
+const LogoMemo = React.memo(Logo);
+
+export default LogoMemo;

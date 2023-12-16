@@ -49,4 +49,6 @@ function Card({ film, isActive = false, isMuted = true, onMouseEnter, onMouseLea
   );
 }
 
-export default Card;
+const CardMemo = React.memo(Card);
+
+export default CardMemo;

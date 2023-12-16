@@ -10,7 +10,7 @@ type FilmsListProps = {
   similarFilms?: IFilm[];
 };
 
-export default function FilmsList({
+function FilmsList({
   length = DEFAULT_FILM_LIST_LENGTH,
   similarFilms,
 }: FilmsListProps): React.JSX.Element {
@@ -43,3 +43,7 @@ export default function FilmsList({
     </div>
   );
 }
+
+const FilmsListMemo = React.memo(FilmsList);
+
+export default FilmsListMemo;

@@ -9,7 +9,7 @@ type ReviewFormProps = {
   filmId: string;
 };
 
-export default function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
+function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -92,3 +92,7 @@ export default function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Elem
     </div>
   );
 }
+
+const AddReviewFormMemo = React.memo(AddReviewForm);
+
+export default AddReviewFormMemo;
