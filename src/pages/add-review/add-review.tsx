@@ -9,13 +9,14 @@ import MovieCardPoster from '../../components/movie-card-poster/movie-card-poste
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFilmByIdAction} from '../../store/api-actions.ts';
 import {Spinner} from '../../components/spinner/spinner.tsx';
+import {getFilm, getIsLoadingFilm} from '../../store/film-process/film-process.selectors.ts';
 
 export default function AddReview(): React.JSX.Element {
   const { id = '' } = useParams();
 
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.currentFilm);
-  const isLoading = useAppSelector((state) => state.isLoadingFilm);
+  const film = useAppSelector(getFilm);
+  const isLoading = useAppSelector(getIsLoadingFilm);
 
   useEffect(() => {
     if (id) {

@@ -10,14 +10,16 @@ import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFilmByIdAction, fetchFilmReviewsAction, fetchSimilarFilmsAction} from '../../store/api-actions.ts';
 import {Spinner} from '../../components/spinner/spinner.tsx';
 import {AuthStatus} from '../../enums/auth-status.ts';
+import {getFilm, getIsLoadingFilm} from '../../store/film-process/film-process.selectors.ts';
+import {getAuthStatus} from '../../store/user-process/user-process.selectors.ts';
 
 function MoviePage(): React.JSX.Element {
   const { id = '' } = useParams();
 
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.currentFilm);
-  const isLoading = useAppSelector((state) => state.isLoadingFilm);
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const film = useAppSelector(getFilm);
+  const isLoading = useAppSelector(getIsLoadingFilm);
+  const authStatus = useAppSelector(getAuthStatus);
   const isAuth = authStatus === AuthStatus.Auth;
 
   useEffect(() => {

@@ -18,7 +18,7 @@ export interface IFilmPromo {
   isFavorite: boolean;
 }
 
-export interface IFilmExtended extends IFilmPromo {
+export interface IFilmPromoInfo extends IFilmPromo {
   backgroundColor: string;
   description: string;
   rating: number;
@@ -26,4 +26,4 @@ export interface IFilmExtended extends IFilmPromo {
   director: string;
   starring: [string];
   runTime: number;
-  }
+}

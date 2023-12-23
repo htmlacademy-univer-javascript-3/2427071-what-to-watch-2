@@ -1,9 +1,9 @@
 import React from 'react';
-import { IFilmExtended } from '../../types/film-types.ts';
+import { IFilmPromoInfo } from '../../types/film-types.ts';
 import { formatRunTime } from '../../utils/formatTime.ts';
 
 type DetailsProps = {
-  film: IFilmExtended;
+  film: IFilmPromoInfo;
 };
 function Details({
   film,

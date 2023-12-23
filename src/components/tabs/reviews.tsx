@@ -1,5 +1,4 @@
 import React from 'react';
-import { reviewsInfo } from '../../mocks/reviews.ts';
 import { IReview } from '../../types/review-types.ts';
 
 type ReviewsProps = {
@@ -27,7 +26,7 @@ function Review({ review }: ReviewProps): React.JSX.Element {
   );
 }
 function FilmReviews({
-  reviews = reviewsInfo,
+  reviews = [],
 }: ReviewsProps): React.JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">

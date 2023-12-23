@@ -9,15 +9,15 @@ import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
 import {AppRoute} from '../../enums/app-route';
 import PrivateRoute from '../private-route/private-route';
-import {useAppSelector} from '../../hooks/store.ts';
 import HistoryRouter from '../history-router/history-router.tsx';
 import browserHistory from '../../browser-history.ts';
+import ScrollTop from '../scroll-top/scroll-top.tsx';
 
 function App(): React.JSX.Element {
-  const films = useAppSelector((state) => state.films);
 
   return (
     <HistoryRouter history={browserHistory}>
+      <ScrollTop/>
       <Routes>
         <Route path={AppRoute.Main}>
           <Route
@@ -31,7 +31,7 @@ function App(): React.JSX.Element {
             path={AppRoute.MyList}
             element={
               <PrivateRoute>
-                <MyList films={films}/>
+                <MyList/>
               </PrivateRoute>
             }
           />

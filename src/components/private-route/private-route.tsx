@@ -3,6 +3,7 @@ import {AppRoute} from '../../enums/app-route.ts';
 import React from 'react';
 import {useAppSelector} from '../../hooks/store.ts';
 import {AuthStatus} from '../../enums/auth-status.ts';
+import {getAuthStatus} from '../../store/user-process/user-process.selectors.ts';
 
 type PrivateRouteProps = {
   children: React.JSX.Element;
@@ -11,7 +12,7 @@ type PrivateRouteProps = {
 function PrivateRoute(props: PrivateRouteProps): React.JSX.Element {
   const {children} = props;
 
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector(getAuthStatus);
   const isAuth = authStatus === AuthStatus.Auth;
 
   return isAuth ? children : <Navigate to={AppRoute.Login}/>;

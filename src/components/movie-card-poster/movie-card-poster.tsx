@@ -23,4 +23,6 @@ function MovieCardPoster({
   );
 }
 
-export default MovieCardPoster;
+const MovieCardPosterMemo = React.memo(MovieCardPoster);
+
+export default MovieCardPosterMemo;
