@@ -18,14 +18,10 @@ export const filmsProcessSlice = createSlice({
   initialState,
   reducers: {
     setFilmsByGenre: (state) => {
-      // eslint-disable-next-line no-debugger
-      debugger;
       state.genreFilms =
         state.activeGenre === ALL_GENRES
           ? state.films
           : state.films.filter((film) => film.genre === state.activeGenre);
-      // eslint-disable-next-line no-debugger
-      debugger;
     },
     setActiveGenre: (state, action) => {
       state.activeGenre = String(action.payload);
