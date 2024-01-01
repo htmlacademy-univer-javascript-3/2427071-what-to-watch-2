@@ -6,10 +6,9 @@ import {
   redirectToRoute,
 } from './action.ts';
 import {AddUserReview, IReview, UserReview} from '../types/review-types.ts';
-import {AuthStatus} from '../enums/auth-status.ts';
 import {AppRoute} from '../enums/app-route.ts';
 import {AuthData, UserData} from '../types/auth.ts';
-import {setAuthStatus} from './user-process/user-process.slice.ts';
+import { FavoriteStatus } from '../enums/favorite-status.ts';
 
 export const fetchFilmsAction = createAsyncThunk<IFilm[], undefined, {
   dispatch: AppDispatch;
@@ -109,7 +108,7 @@ export const fetchFilmReviewsAction = createAsyncThunk<
   );
 
 export const checkAuthStatus = createAsyncThunk<
-  void,
+  UserData,
   undefined,
   {
     dispatch: AppDispatch;
@@ -119,13 +118,8 @@ export const checkAuthStatus = createAsyncThunk<
 >(
   '/login',
   async (_arg, { extra: api}) => {
-    try {
-
-      await api.get('/login');
-      setAuthStatus(AuthStatus.Auth);
-    } catch (e) {
-      setAuthStatus(AuthStatus.NoAuth);
-    }
+    const {data} = await api.get<UserData>('/login');
+    return data;
   },
 );
 
@@ -180,4 +174,18 @@ export const addCommentAction = createAsyncThunk<void, AddUserReview, {
     dispatch(redirectToRoute(`${AppRoute.Films}/${filmId}`));
   },
 );
+
+export const changeFavoriteStatus = createAsyncThunk<
+  void,
+  {filmId: string; status: FavoriteStatus},
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'favorite/status',
+    async ({filmId, status}, { extra: api}) => {
+      await api.post(`/favorite/${filmId}/${status}`);
+    },
+  );
 
