@@ -41,6 +41,6 @@ export const filmProcessSlice = createSlice({
       })
       .addCase(fetchSimilarFilmsAction.rejected, (state) => {
         state.similarFilms = [];
-      })
+      });
   }
 });
