@@ -12,13 +12,13 @@ function MovieCard({film}: MovieProps): React.JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src={film.posterImage} alt={film.name}/>
+        <img src={film.backgroundImage} alt={film.name}/>
       </div>
       <h1 className="visually-hidden">WTW</h1>
       <Header/>
       <div className="film-card__wrap">
         <div className="film-card__info">
-          <MovieCardPoster src={film.backgroundImage} alt={film.name} />
+          <MovieCardPoster src={film.posterImage} alt={film.name} />
           <div className="film-card__desc">
             <h2 className="film-card__title">{film.name}</h2>
             <p className="film-card__meta">
@@ -33,4 +33,6 @@ function MovieCard({film}: MovieProps): React.JSX.Element {
   );
 }
 
-export default MovieCard;
+const MovieCardMemo = React.memo(MovieCard);
+
+export default MovieCardMemo;

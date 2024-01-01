@@ -5,11 +5,13 @@ import {logoutAction} from '../../store/api-actions.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {AuthStatus} from '../../enums/auth-status.ts';
 import {AppRoute} from '../../enums/app-route.ts';
+import {getAuthStatus, getUser} from '../../store/user-process/user-process.selectors.ts';
 
 function UserBlock(): React.JSX.Element {
   const dispatch = useAppDispatch();
 
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector(getAuthStatus);
+  const user = useAppSelector(getUser);
   const isAuth = authStatus === AuthStatus.Auth;
 
   const handleClick = useCallback(() => {
@@ -20,7 +22,10 @@ function UserBlock(): React.JSX.Element {
     <ul className="user-block">
       <li className="user-block__item">
         <div className="user-block__avatar">
-          <img src="img/avatar.jpg" alt="User avatar" />
+          <img
+            src={user?.avatarUrl || 'img/avatar.jpg'}
+            alt={user?.name || 'User avatar'}
+          />
         </div>
       </li>
       <li className="user-block__item">

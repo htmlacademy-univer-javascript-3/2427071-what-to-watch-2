@@ -1,17 +1,18 @@
 import React from 'react';
-import { IFilmExtended } from '../../types/film-types.ts';
+import { IFilmPromoInfo } from '../../types/film-types.ts';
 
 type OverviewProps = {
-  film: IFilmExtended;
+  film: IFilmPromoInfo;
 };
-export default function Overview({ film }: OverviewProps): React.JSX.Element {
+function Overview({ film }: OverviewProps): React.JSX.Element {
   return (
     <>
       <div className="film-rating">
         <div className="film-rating__score">{film.rating}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">Very good</span>
-          <span className="film-rating__count">240 ratings</span>
+          {/*<span className="film-rating__level">{filmRating}</span>*/}
+          <span className="film-rating__count">{film.scoresCount} ratings</span>
         </p>
       </div>
       <div className="film-card__text">
@@ -26,3 +27,7 @@ export default function Overview({ film }: OverviewProps): React.JSX.Element {
     </>
   );
 }
+
+const OverviewMemo = React.memo(Overview);
+
+export default OverviewMemo;

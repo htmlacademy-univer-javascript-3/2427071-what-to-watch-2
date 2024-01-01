@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { IFilmExtended } from '../../types/film-types.ts';
+import { IFilmPromoInfo } from '../../types/film-types.ts';
 import Overview from './overview.tsx';
 import Details from './details.tsx';
 import Reviews from './reviews.tsx';
@@ -10,10 +10,10 @@ const TABS = ['Overview', 'Details', 'Reviews'] as const;
 type Tab = typeof TABS[number];
 
 type TabsProps = {
-  film: IFilmExtended;
+  film: IFilmPromoInfo;
 };
 
-export default function Tabs({ film }: TabsProps): React.JSX.Element {
+function Tabs({ film }: TabsProps): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<Tab>(TABS[0]);
 
   const handleSetActiveTab = useCallback(
@@ -62,3 +62,7 @@ export default function Tabs({ film }: TabsProps): React.JSX.Element {
     </div>
   );
 }
+
+const TabsMemo = React.memo(Tabs);
+
+export default TabsMemo;

@@ -1,11 +1,11 @@
 import React from 'react';
-import { IFilmExtended } from '../../types/film-types.ts';
+import { IFilmPromoInfo } from '../../types/film-types.ts';
 import { formatRunTime } from '../../utils/formatTime.ts';
 
 type DetailsProps = {
-  film: IFilmExtended;
+  film: IFilmPromoInfo;
 };
-export default function Details({
+function Details({
   film,
 }: DetailsProps): React.JSX.Element {
   return (
@@ -49,3 +49,7 @@ export default function Details({
     </div>
   );
 }
+
+const DetailsMemo = React.memo(Details);
+
+export default DetailsMemo;
