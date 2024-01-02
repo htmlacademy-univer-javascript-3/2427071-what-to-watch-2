@@ -116,7 +116,7 @@ export const checkAuthStatus = createAsyncThunk<
     extra: AxiosInstance;
   }
 >(
-  '/login',
+  'user/login',
   async (_arg, { extra: api}) => {
     const {data} = await api.get<UserData>('/login');
     return data;
