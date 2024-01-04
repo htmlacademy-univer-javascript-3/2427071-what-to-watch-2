@@ -3,12 +3,23 @@ import Header from '../header/header';
 import React from 'react';
 import MovieCardPoster from '../movie-card-poster/movie-card-poster';
 import { IFilmPromo} from '../../types/film-types';
+import { useAppSelector } from '../../hooks/store';
+import { getAuthStatus } from '../../store/user-process/user-process.selectors';
+import { AuthStatus } from '../../enums/auth-status';
+import { getFavoriteFilms } from '../../store/films-process/films-process.selectors';
 
 type MovieProps = {
   film: IFilmPromo;
 };
 
 function MovieCard({film}: MovieProps): React.JSX.Element {
+  const authStatus = useAppSelector(getAuthStatus);
+  const isAuth = authStatus === AuthStatus.Auth;
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
+  const isFavorite = favoriteFilms?.find(
+    (favorite) => String(favorite.id) === String(film.id)
+  );
+
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -25,7 +36,11 @@ function MovieCard({film}: MovieProps): React.JSX.Element {
               <span className="film-card__genre">{film.genre}</span>
               <span className="film-card__year">{film.released}</span>
             </p>
-            <FilmCardButtons/>
+            <FilmCardButtons
+              id={film.id}
+              isFavorite={Boolean(isFavorite)}
+              isAuth={isAuth}
+            />
           </div>
         </div>
       </div>

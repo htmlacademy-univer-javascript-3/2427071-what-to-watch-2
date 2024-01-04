@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../constants/namespaces.ts';
 import {UserProcessState} from '../../types/state.ts';
 import {AuthStatus} from '../../enums/auth-status.ts';
-import {loginAction, logoutAction} from '../api-actions.ts';
+import {checkAuthStatus, loginAction, logoutAction} from '../api-actions.ts';
 import {removeToken, setToken} from '../../services/token.ts';
 
 const initialState: UserProcessState = {
@@ -13,11 +13,7 @@ const initialState: UserProcessState = {
 export const userProcessSlice = createSlice({
   name: NameSpace.User,
   initialState,
-  reducers: {
-    setAuthStatus: (state, action) => {
-      state.authorizationStatus = action.payload as AuthStatus;
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(logoutAction.fulfilled, (state) => {
@@ -29,8 +25,16 @@ export const userProcessSlice = createSlice({
         setToken(action.payload.token);
         state.user = action.payload;
         state.authorizationStatus = AuthStatus.Auth;
+      })
+      .addCase(checkAuthStatus.fulfilled, (state, action) => {
+        setToken(action.payload.token);
+        state.user = action.payload;
+        state.authorizationStatus = AuthStatus.Auth;
+      })
+      .addCase(checkAuthStatus.rejected, (state) => {
+        removeToken();
+        state.user = null;
+        state.authorizationStatus = AuthStatus.NoAuth;
       });
   }
 });
-
-export const {setAuthStatus} = userProcessSlice.actions;

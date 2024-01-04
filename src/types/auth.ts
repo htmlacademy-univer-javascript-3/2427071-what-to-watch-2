@@ -4,7 +4,6 @@ export type AuthData = {
 }
 
 export type UserData = {
-  id: number;
   email: string;
   token: string;
   name: string;

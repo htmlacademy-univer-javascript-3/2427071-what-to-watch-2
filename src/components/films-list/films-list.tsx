@@ -8,17 +8,17 @@ import {getFilmsByGenre, getIsLoadingList} from '../../store/films-process/films
 
 type FilmsListProps = {
   length?: number;
-  similarFilms?: IFilm[];
+  films?: IFilm[];
 };
 
 function FilmsList({
   length = DEFAULT_FILM_LIST_LENGTH,
-  similarFilms,
+  films,
 }: FilmsListProps): React.JSX.Element {
   const [activeFilm, setActiveFilm] = useState<number | null>(null);
   const genreFilms = useAppSelector(getFilmsByGenre);
   const isLoading = useAppSelector(getIsLoadingList);
-  const filteredItems = similarFilms || genreFilms;
+  const filteredItems = films || genreFilms;
 
   const handleCardHover = (id: number) => {
     setActiveFilm(id);

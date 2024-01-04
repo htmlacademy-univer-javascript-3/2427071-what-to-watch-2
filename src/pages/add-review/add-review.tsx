@@ -68,7 +68,7 @@ export default function AddReview(): React.JSX.Element {
         </header>
         <MovieCardPoster
           size={'small'}
-          src={film.backgroundImage}
+          src={film.posterImage}
           alt={film.name}
         />
       </div>

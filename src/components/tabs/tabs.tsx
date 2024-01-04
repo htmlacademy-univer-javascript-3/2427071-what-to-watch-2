@@ -3,7 +3,7 @@ import { IFilmPromoInfo } from '../../types/film-types.ts';
 import Overview from './overview.tsx';
 import Details from './details.tsx';
 import Reviews from './reviews.tsx';
-import { reviewsInfo } from '../../mocks/reviews.ts';
+import { IReview } from '../../types/review-types.ts';
 
 const TABS = ['Overview', 'Details', 'Reviews'] as const;
 
@@ -11,9 +11,10 @@ type Tab = typeof TABS[number];
 
 type TabsProps = {
   film: IFilmPromoInfo;
+  reviews: IReview[];
 };
 
-function Tabs({ film }: TabsProps): React.JSX.Element {
+function Tabs({ film, reviews }: TabsProps): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<Tab>(TABS[0]);
 
   const handleSetActiveTab = useCallback(
@@ -34,11 +35,11 @@ function Tabs({ film }: TabsProps): React.JSX.Element {
       case 'Details':
         return <Details film={film} />;
       case 'Reviews':
-        return <Reviews reviews={reviewsInfo} />;
+        return <Reviews reviews={reviews} />;
       default:
         return null;
     }
-  }, [activeTab, film]);
+  }, [activeTab, film, reviews]);
 
   return (
     <div className="film-card__desc">

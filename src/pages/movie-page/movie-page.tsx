@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
@@ -10,17 +10,24 @@ import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFilmByIdAction, fetchFilmReviewsAction, fetchSimilarFilmsAction} from '../../store/api-actions.ts';
 import {Spinner} from '../../components/spinner/spinner.tsx';
 import {AuthStatus} from '../../enums/auth-status.ts';
-import {getFilm, getIsLoadingFilm} from '../../store/film-process/film-process.selectors.ts';
+import {getFilm, getIsLoadingFilm, getReviews} from '../../store/film-process/film-process.selectors.ts';
 import {getAuthStatus} from '../../store/user-process/user-process.selectors.ts';
+import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons.tsx';
+import { getFavoriteFilms } from '../../store/films-process/films-process.selectors.ts';
 
 function MoviePage(): React.JSX.Element {
   const { id = '' } = useParams();
 
   const dispatch = useAppDispatch();
   const film = useAppSelector(getFilm);
+  const reviews = useAppSelector(getReviews);
   const isLoading = useAppSelector(getIsLoadingFilm);
   const authStatus = useAppSelector(getAuthStatus);
   const isAuth = authStatus === AuthStatus.Auth;
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
+  const isFavorite = favoriteFilms?.find(
+    (favorite) => String(favorite.id) === String(film?.id)
+  );
 
   useEffect(() => {
     if (id) {
@@ -43,7 +50,7 @@ function MoviePage(): React.JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.posterImage} alt={film.name} />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <Header />
@@ -54,42 +61,19 @@ function MoviePage(): React.JSX.Element {
                 <span className="film-card__genre">{film.genre}</span>
                 <span className="film-card__year">{film.released}</span>
               </p>
-              <div className="film-card__buttons">
-                <button
-                  className="btn btn--play film-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 19" width={19} height={19}>
-                    <use xlinkHref="#play-s" />
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button
-                  className="btn btn--list film-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
-                {isAuth && (
-                  <Link
-                    to={`${AppRoute.Films}/${film.id}${AppRoute.Review}`}
-                    className="btn film-card__button"
-                  >
-                    Add review
-                  </Link>
-                )}
-              </div>
+              <FilmCardButtons
+                isAuth={isAuth}
+                id={film.id}
+                isFavorite={Boolean(isFavorite)}
+                isReviewButtonVisible
+              />
             </div>
           </div>
         </div>
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
-            <MovieCardPoster src={film.backgroundImage} alt={film.name} />
-            <Tabs film={film} />
+            <MovieCardPoster src={film.posterImage} alt={film.name} />
+            <Tabs film={film} reviews={reviews} />
           </div>
         </div>
       </section>
