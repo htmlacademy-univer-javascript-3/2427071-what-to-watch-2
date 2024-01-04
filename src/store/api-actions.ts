@@ -2,13 +2,69 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.ts';
 import {AxiosInstance} from 'axios';
 import {IFilm, IFilmPromo, IFilmPromoInfo} from '../types/film-types.ts';
-import {
-  redirectToRoute,
-} from './action.ts';
+import {redirectToRoute} from './action.ts';
 import {AddUserReview, IReview, UserReview} from '../types/review-types.ts';
 import {AppRoute} from '../enums/app-route.ts';
 import {AuthData, UserData} from '../types/auth.ts';
 import { FavoriteStatus } from '../enums/favorite-status.ts';
+
+// todo add try catch errors & check for dispatch
+
+export const loginAction = createAsyncThunk<
+  UserData,
+  AuthData,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  '/login',
+  async ({email, password}, { dispatch, extra: api}) => {
+    const {data} = await api.post<UserData>(
+      '/login',
+      {
+        email,
+        password,
+      }
+    );
+
+    dispatch(redirectToRoute(AppRoute.Main));
+
+    return data;
+  },
+);
+
+export const logoutAction = createAsyncThunk<
+  void,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  '/logout',
+  async (_arg, { extra: api}) => {
+    await api.delete('/logout');
+  },
+);
+
+export const checkAuthStatusAction = createAsyncThunk<
+  UserData,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  'user/login',
+  async (_arg, { extra: api}) => {
+    const {data} = await api.get<UserData>('/login');
+    return data;
+  },
+);
 
 export const fetchFilmsAction = createAsyncThunk<IFilm[], undefined, {
   dispatch: AppDispatch;
@@ -107,61 +163,6 @@ export const fetchFilmReviewsAction = createAsyncThunk<
     },
   );
 
-export const checkAuthStatus = createAsyncThunk<
-  UserData,
-  undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->(
-  'user/login',
-  async (_arg, { extra: api}) => {
-    const {data} = await api.get<UserData>('/login');
-    return data;
-  },
-);
-
-export const loginAction = createAsyncThunk<
-  UserData,
-  AuthData,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->(
-  '/login',
-  async ({email, password}, { dispatch, extra: api}) => {
-    const {data} = await api.post<UserData>(
-      '/login',
-      {
-        email,
-        password,
-      }
-    );
-
-    dispatch(redirectToRoute(AppRoute.Main));
-
-    return data;
-  },
-);
-
-export const logoutAction = createAsyncThunk<
-  void,
-  undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->(
-  '/logout',
-  async (_arg, { extra: api}) => {
-    await api.delete('/logout');
-  },
-);
 
 export const addCommentAction = createAsyncThunk<void, AddUserReview, {
   dispatch: AppDispatch;
@@ -169,13 +170,13 @@ export const addCommentAction = createAsyncThunk<void, AddUserReview, {
   extra: AxiosInstance;
 }>(
   'addCommentAction',
-  async ({filmId, comment, rating}, {dispatch, extra: api}) => {
+  async ({filmId, comment, rating}, {extra: api}) => {
     await api.post<UserReview>(`comments/${filmId}`, {comment, rating});
-    dispatch(redirectToRoute(`${AppRoute.Films}/${filmId}`));
   },
 );
 
-export const changeFavoriteStatus = createAsyncThunk<
+// TODO add tests
+export const changeFavoriteStatusAction = createAsyncThunk<
   void,
   {filmId: string; status: FavoriteStatus},
   {
@@ -188,4 +189,3 @@ export const changeFavoriteStatus = createAsyncThunk<
       await api.post(`/favorite/${filmId}/${status}`);
     },
   );
-

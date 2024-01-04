@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../enums/app-route';
 import { FavoriteStatus } from '../../enums/favorite-status';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
-import { changeFavoriteStatus, fetchFavoriteFilmsAction, fetchFilmByIdAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { changeFavoriteStatusAction, fetchFavoriteFilmsAction, fetchFilmByIdAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import { getFavoriteFilmsLength } from '../../store/films-process/films-process.selectors';
 
 type FilmCardButtonsProps = {
@@ -33,7 +33,7 @@ function FilmCardButtons({
     }
 
     dispatch(
-      changeFavoriteStatus({
+      changeFavoriteStatusAction({
         status: isFavorite
           ? FavoriteStatus.NoFavorite
           : FavoriteStatus.Favorite,
