@@ -8,8 +8,6 @@ import {AppRoute} from '../enums/app-route.ts';
 import {AuthData, UserData} from '../types/auth.ts';
 import { FavoriteStatus } from '../enums/favorite-status.ts';
 
-// todo add try catch errors & check for dispatch
-
 export const loginAction = createAsyncThunk<
   UserData,
   AuthData,
@@ -22,7 +20,7 @@ export const loginAction = createAsyncThunk<
   '/login',
   async ({email, password}, { dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(
-      '/login',
+      AppRoute.Login,
       {
         email,
         password,
@@ -46,7 +44,7 @@ export const logoutAction = createAsyncThunk<
 >(
   '/logout',
   async (_arg, { extra: api}) => {
-    await api.delete('/logout');
+    await api.delete(AppRoute.Logout);
   },
 );
 
@@ -61,7 +59,7 @@ export const checkAuthStatusAction = createAsyncThunk<
 >(
   'user/login',
   async (_arg, { extra: api}) => {
-    const {data} = await api.get<UserData>('/login');
+    const {data} = await api.get<UserData>(AppRoute.Login);
     return data;
   },
 );
@@ -73,7 +71,7 @@ export const fetchFilmsAction = createAsyncThunk<IFilm[], undefined, {
 }>(
   '/films',
   async (_arg, {extra: api}) => {
-    const { data } = await api.get<IFilm[]>('/films');
+    const { data } = await api.get<IFilm[]>(AppRoute.Films);
 
     return data;
   },
@@ -90,7 +88,7 @@ export const fetchFilmByIdAction = createAsyncThunk<
     '/films/id',
     async (id: string, { extra: api}) => {
 
-      const { data } = await api.get<IFilmPromoInfo>(`/films/${id}`);
+      const { data } = await api.get<IFilmPromoInfo>(`${AppRoute.Films}/${id}`);
 
       return data;
     },
@@ -107,7 +105,7 @@ export const fetchSimilarFilmsAction = createAsyncThunk<
     '/films/id/similar',
     async (id: string, { extra: api}) => {
 
-      const { data } = await api.get<IFilm[]>(`/films/${id}/similar`);
+      const { data } = await api.get<IFilm[]>(`${AppRoute.Films}/${id}/similar`);
 
       return data;
 
