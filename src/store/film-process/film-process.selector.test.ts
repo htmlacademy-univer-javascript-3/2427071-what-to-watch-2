@@ -2,7 +2,7 @@ import { NameSpace } from '../../constants/namespaces.ts';
 import {createCurrentFilm, createFilm, createReview} from '../../mocks/mocks.ts';
 import {getFilm, getIsLoadingFilm, getReviews} from './film-process.selectors.ts';
 
-describe('Film process selectors', () => {
+describe('Film process selectors Test', () => {
   const film = createCurrentFilm();
   const filmSimilar = createFilm();
   const review = createReview();

@@ -3,7 +3,7 @@ import {datatype, name, internet, commerce, lorem} from 'faker';
 import { ThunkDispatch } from 'redux-thunk';
 import { createApi } from '../services/api';
 import {Token} from '../services/token.ts';
-import {AuthData} from '../types/auth.ts';
+import {AuthData, UserData} from '../types/auth.ts';
 import {IReview} from '../types/review-types.ts';
 import { State } from '../types/state';
 import {IFilm, IFilmPromo, IFilmPromoInfo} from '../types/film-types.ts';
@@ -18,6 +18,14 @@ export const createFakeUser = (): AuthData => ({
 } as AuthData);
 
 export const createFakeToken = (): Token => datatype.uuid();
+
+export const createUser = {
+  id: datatype.number(),
+  email: internet.email(),
+  token: datatype.uuid(),
+  name: name.title(),
+  avatarUrl: internet.url(),
+} as UserData;
 
 export const createFilm = (): IFilm => ({
   id: datatype.uuid(),
