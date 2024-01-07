@@ -1,5 +1,5 @@
 import {store} from '../store';
-import {UserData} from './auth.ts';
+import {CheckUserData, UserData} from './auth.ts';
 import {AuthStatus} from '../enums/auth-status.ts';
 import {ALL_GENRES} from '../constants/genres.ts';
 import {IReview} from './review-types.ts';
@@ -11,7 +11,7 @@ export type AppDispatch = typeof store.dispatch;
 
 export type UserProcessState = {
   authorizationStatus: AuthStatus;
-  user: UserData | null;
+  user: UserData | CheckUserData | null;
 }
 
 export type FilmsProcessState = {

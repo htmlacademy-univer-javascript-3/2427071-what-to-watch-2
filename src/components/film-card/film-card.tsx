@@ -1,18 +1,18 @@
 import FilmCardButtons from '../film-card-buttons/film-card-buttons';
 import Header from '../header/header';
 import React from 'react';
-import MovieCardPoster from '../movie-card-poster/movie-card-poster';
+import MovieCardPoster from '../film-card-poster/film-card-poster.tsx';
 import { IFilmPromo} from '../../types/film-types';
 import { useAppSelector } from '../../hooks/store';
 import { getAuthStatus } from '../../store/user-process/user-process.selectors';
 import { AuthStatus } from '../../enums/auth-status';
 import { getFavoriteFilms } from '../../store/films-process/films-process.selectors';
 
-type MovieProps = {
+type FilmProps = {
   film: IFilmPromo;
 };
 
-function MovieCard({film}: MovieProps): React.JSX.Element {
+function FilmCard({film}: FilmProps): React.JSX.Element {
   const authStatus = useAppSelector(getAuthStatus);
   const isAuth = authStatus === AuthStatus.Auth;
   const favoriteFilms = useAppSelector(getFavoriteFilms);
@@ -48,6 +48,6 @@ function MovieCard({film}: MovieProps): React.JSX.Element {
   );
 }
 
-const MovieCardMemo = React.memo(MovieCard);
+const FilmCardMemo = React.memo(FilmCard);
 
-export default MovieCardMemo;
+export default FilmCardMemo;

@@ -2,12 +2,12 @@ import React from 'react';
 import { IFilmPromoInfo } from '../../types/film-types.ts';
 import { formatRunTime } from '../../utils/formatTime.ts';
 
-type DetailsProps = {
+type FilmDetailsProps = {
   film: IFilmPromoInfo;
 };
-function Details({
+function FilmDetails({
   film,
-}: DetailsProps): React.JSX.Element {
+}: FilmDetailsProps): React.JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -50,6 +50,6 @@ function Details({
   );
 }
 
-const DetailsMemo = React.memo(Details);
+const FilmDetailsMemo = React.memo(FilmDetails);
 
-export default DetailsMemo;
+export default FilmDetailsMemo;

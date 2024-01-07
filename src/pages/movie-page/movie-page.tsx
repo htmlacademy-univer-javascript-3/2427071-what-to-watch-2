@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
+import MovieCardPoster from '../../components/film-card-poster/film-card-poster.tsx';
 import { AppRoute } from '../../enums/app-route';
 import FilmsList from '../../components/films-list/films-list';
 import Tabs from '../../components/tabs/tabs';

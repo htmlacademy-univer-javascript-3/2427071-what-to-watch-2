@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Footer from '../../components/footer/footer';
-import MovieCard from '../../components/film-card/movie-card';
+import MovieCard from '../../components/film-card/film-card.tsx';
 import Catalog from '../../components/catalog/catalog';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFavoriteFilmsAction, fetchFilmPromoAction} from '../../store/api-actions.ts';

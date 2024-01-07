@@ -5,7 +5,7 @@ import UserBlock from '../../components/user-block/user-block';
 import './add-review.css';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import { AppRoute } from '../../enums/app-route';
-import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
+import MovieCardPoster from '../../components/film-card-poster/film-card-poster.tsx';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFilmByIdAction} from '../../store/api-actions.ts';
 import {Spinner} from '../../components/spinner/spinner.tsx';

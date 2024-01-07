@@ -1,5 +1,5 @@
 import React from 'react';
-import './movie-card-poster.css';
+import './film-card-poster.css';
 
 type MovieCardPosterProps = {
   size?: string;
@@ -7,7 +7,7 @@ type MovieCardPosterProps = {
   alt?: string;
 };
 
-function MovieCardPoster({
+function FilmCardPoster({
   size = '',
   src = '',
   alt = '',
@@ -17,12 +17,12 @@ function MovieCardPoster({
   }`;
 
   return (
-    <div className={computedClass}>
+    <div className={computedClass} data-testid="poster">
       <img src={src} alt={alt} />
     </div>
   );
 }
 
-const MovieCardPosterMemo = React.memo(MovieCardPoster);
+const FilmCardPosterMemo = React.memo(FilmCardPoster);
 
-export default MovieCardPosterMemo;
+export default FilmCardPosterMemo;
