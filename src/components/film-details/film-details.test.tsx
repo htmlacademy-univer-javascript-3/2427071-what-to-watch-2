@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import {createCurrentFilm} from '../../mocks/mocks.ts';
+import {createCurrentFilm} from '../../mocks/mocks';
 import FilmDetails from './film-details';
 
 describe('Component: FilmDetails', () => {
