@@ -1,7 +1,7 @@
 import FilmCardButtons from '../film-card-buttons/film-card-buttons';
 import Header from '../header/header';
 import React from 'react';
-import MovieCardPoster from '../movie-card-poster/movie-card-poster';
+import MovieCardPoster from '../film-card-poster/film-card-poster.tsx';
 import { IFilmPromo} from '../../types/film-types';
 import { useAppSelector } from '../../hooks/store';
 import { getAuthStatus } from '../../store/user-process/user-process.selectors';

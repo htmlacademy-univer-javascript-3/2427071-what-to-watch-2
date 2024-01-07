@@ -3,7 +3,7 @@ import React from 'react';
 
 export function Spinner(): React.JSX.Element {
   return (
-    <div className="spinner-container">
+    <div className="spinner-container" data-testid="spinner">
       <RotatingLines
         strokeColor="grey"
         strokeWidth="5"

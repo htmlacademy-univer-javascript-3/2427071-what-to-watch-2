@@ -6,7 +6,7 @@ import {getAuthStatus, getUser} from './user-process.selectors.ts';
 describe('User process selectors Test', () => {
   const state = {
     [NameSpace.User]: {
-      user: createUser(),
+      user: createUser,
       authorizationStatus: AuthStatus.Unknown,
     }
   };

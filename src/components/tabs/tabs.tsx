@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { IFilmPromoInfo } from '../../types/film-types.ts';
-import Overview from './overview.tsx';
-import Details from './details.tsx';
-import Reviews from './reviews.tsx';
+import Overview from '../overview/overview.tsx';
+import Details from '../film-details/film-details';
+import Reviews from '../film-reviews/film-reviews';
 import { IReview } from '../../types/review-types.ts';
 
 const TABS = ['Overview', 'Details', 'Reviews'] as const;

@@ -5,7 +5,7 @@ import { formatRunTime } from '../../utils/formatTime.ts';
 type DetailsProps = {
   film: IFilmPromoInfo;
 };
-function Details({
+function FilmDetails({
   film,
 }: DetailsProps): React.JSX.Element {
   return (
@@ -50,6 +50,6 @@ function Details({
   );
 }
 
-const DetailsMemo = React.memo(Details);
+const DetailsMemo = React.memo(FilmDetails);
 
 export default DetailsMemo;
