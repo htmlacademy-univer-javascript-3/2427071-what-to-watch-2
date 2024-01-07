@@ -4,7 +4,7 @@ import Footer from './footer';
 
 describe('Component: Footer', () => {
   it('should render correctly', () => {
-    const expectedText = '© 2019 What to watch Ltd.';
+    const expectedText = '© 2023 What to watch Ltd.';
 
     render(
       <BrowserRouter>
