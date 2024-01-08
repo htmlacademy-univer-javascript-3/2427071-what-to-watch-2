@@ -1,4 +1,5 @@
 import {describe} from 'vitest';
+import {FavoriteStatus} from '../enums/favorite-status.ts';
 import {createApi} from '../services/api.ts';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
@@ -13,18 +14,18 @@ import {
   createPromoFilm,
   createReview,
   extractActionsTypes
-} from '../mocks/mocks.ts';
-import {redirectToRoute} from './action.ts';
+} from '../utils/mocks';
+import {redirectToRoute} from './action';
 import {
-  addCommentAction,
+  addCommentAction, changeFavoriteStatusAction,
   checkAuthStatusAction,
   fetchFavoriteFilmsAction,
   fetchFilmByIdAction, fetchFilmPromoAction, fetchFilmReviewsAction,
   fetchFilmsAction,
   fetchSimilarFilmsAction, loginAction, logoutAction
-} from './api-actions.ts';
+} from './api-actions';
 
-describe('Async actions', () => {
+describe('Api actions', () => {
   const axios = createApi();
   const mockAxiosAdapter = new MockAdapter(axios);
   const middleware = [thunk.withExtraArgument(axios)];
@@ -90,228 +91,254 @@ describe('Async actions', () => {
         checkAuthStatusAction.rejected.type,
       ]);
     });
+  });
 
-    describe('fetchFilms', () => {
-      it('should dispatch "fetchFilmsAction.pending", "fetchFilmsAction.fulfilled", when server response 200', async () => {
-        const mockFilms = [createFilm(), createFilm()];
-        mockAxiosAdapter.onGet('/films').reply(200, mockFilms);
+  describe('fetchFilms', () => {
+    it('should dispatch "fetchFilmsAction.pending", "fetchFilmsAction.fulfilled", when server response 200', async () => {
+      const mockFilms = [createFilm(), createFilm()];
+      mockAxiosAdapter.onGet('/films').reply(200, mockFilms);
 
-        await store.dispatch(fetchFilmsAction());
+      await store.dispatch(fetchFilmsAction());
 
-        const emittedActions = store.getActions();
-        const extractedActionsTypes = extractActionsTypes(emittedActions);
-        const fetchFilmsFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFilmsAction.fulfilled>;
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchFilmsFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFilmsAction.fulfilled>;
 
-        expect(extractedActionsTypes).toEqual([
-          fetchFilmsAction.pending.type,
-          fetchFilmsAction.fulfilled.type,
-        ]);
+      expect(extractedActionsTypes).toEqual([
+        fetchFilmsAction.pending.type,
+        fetchFilmsAction.fulfilled.type,
+      ]);
 
-        expect(fetchFilmsFulfilled.payload).toEqual(mockFilms);
-      });
-
-      it('should dispatch "fetchFilmsAction.pending", "fetchFilmsAction.rejected" when server response 400', async () => {
-        mockAxiosAdapter.onGet('/films').reply(400);
-
-        await store.dispatch(fetchFilmsAction());
-        const actions = extractActionsTypes(store.getActions());
-
-        expect(actions).toEqual([
-          fetchFilmsAction.pending.type,
-          fetchFilmsAction.rejected.type,
-        ]);
-      });
-
+      expect(fetchFilmsFulfilled.payload).toEqual(mockFilms);
     });
 
-    describe('fetchFilmById', () => {
-      it('should dispatch "fetchFilmByIdAction.pending", "fetchFilmByIdAction.fulfilled", when server response 200', async () => {
-        const mockFilm = createCurrentFilm();
-        mockAxiosAdapter.onGet('/films/id').reply(200, mockFilm);
+    it('should dispatch "fetchFilmsAction.pending", "fetchFilmsAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet('/films').reply(400);
 
-        await store.dispatch(fetchFilmByIdAction('id'));
+      await store.dispatch(fetchFilmsAction());
+      const actions = extractActionsTypes(store.getActions());
 
-        const emittedActions = store.getActions();
-        const extractedActionsTypes = extractActionsTypes(emittedActions);
-        const fetchFilmByIdFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFilmByIdAction.fulfilled>;
-
-        expect(extractedActionsTypes).toEqual([
-          fetchFilmByIdAction.pending.type,
-          fetchFilmByIdAction.fulfilled.type,
-        ]);
-
-        expect(fetchFilmByIdFulfilled.payload)
-          .toEqual(mockFilm);
-      });
-
-      it('should dispatch "fetchFilmByIdAction.pending", "fetchFilmByIdAction.rejected" when server response 400', async () => {
-        mockAxiosAdapter.onGet('/films/id').reply(400);
-
-        await store.dispatch(fetchFilmByIdAction('id'));
-        const actions = extractActionsTypes(store.getActions());
-
-        expect(actions).toEqual([
-          fetchFilmByIdAction.pending.type,
-          fetchFilmByIdAction.rejected.type,
-        ]);
-      });
+      expect(actions).toEqual([
+        fetchFilmsAction.pending.type,
+        fetchFilmsAction.rejected.type,
+      ]);
     });
 
-    describe('fetchSimilarFilms', () => {
-      it('should dispatch "fetchSimilarFilmsAction.pending", "fetchSimilarFilmsAction.fulfilled", when server response 200', async () => {
-        const mockFilms = [createFilm(), createFilm()];
-        mockAxiosAdapter.onGet('/films/id/similar').reply(200, mockFilms);
+  });
 
-        await store.dispatch(fetchSimilarFilmsAction('id'));
+  describe('fetchFilmById', () => {
+    it('should dispatch "fetchFilmByIdAction.pending", "fetchFilmByIdAction.fulfilled", when server response 200', async () => {
+      const mockFilm = createCurrentFilm();
+      mockAxiosAdapter.onGet('/films/id').reply(200, mockFilm);
 
-        const emittedActions = store.getActions();
-        const extractedActionsTypes = extractActionsTypes(emittedActions);
-        const fetchSimilarFilmsFulfilled = emittedActions.at(1) as ReturnType<typeof fetchSimilarFilmsAction.fulfilled>;
+      await store.dispatch(fetchFilmByIdAction('id'));
 
-        expect(extractedActionsTypes).toEqual([
-          fetchSimilarFilmsAction.pending.type,
-          fetchSimilarFilmsAction.fulfilled.type,
-        ]);
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchFilmByIdFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFilmByIdAction.fulfilled>;
 
-        expect(fetchSimilarFilmsFulfilled.payload).toEqual(mockFilms);
-      });
+      expect(extractedActionsTypes).toEqual([
+        fetchFilmByIdAction.pending.type,
+        fetchFilmByIdAction.fulfilled.type,
+      ]);
 
-      it('should dispatch "fetchSimilarFilmsAction.pending", "fetchSimilarFilmsAction.rejected" when server response 400', async () => {
-        mockAxiosAdapter.onGet('/films/id/similar').reply(400);
-
-        await store.dispatch(fetchSimilarFilmsAction('id'));
-        const actions = extractActionsTypes(store.getActions());
-
-        expect(actions).toEqual([
-          fetchSimilarFilmsAction.pending.type,
-          fetchSimilarFilmsAction.rejected.type,
-        ]);
-      });
+      expect(fetchFilmByIdFulfilled.payload)
+        .toEqual(mockFilm);
     });
 
-    describe('fetchFavorite', () => {
-      it('should dispatch "fetchFavoriteFilmsAction.pending", "fetchFavoriteFilmsAction.fulfilled", when server response 200', async () => {
-        const mockFilms = [createFilm(), createFilm()];
-        mockAxiosAdapter.onGet('/favorite').reply(200, mockFilms);
+    it('should dispatch "fetchFilmByIdAction.pending", "fetchFilmByIdAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet('/films/id').reply(400);
 
-        await store.dispatch(fetchFavoriteFilmsAction());
+      await store.dispatch(fetchFilmByIdAction('id'));
+      const actions = extractActionsTypes(store.getActions());
 
-        const emittedActions = store.getActions();
-        const extractedActionsTypes = extractActionsTypes(emittedActions);
-        const fetchFavoriteFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFavoriteFilmsAction.fulfilled>;
+      expect(actions).toEqual([
+        fetchFilmByIdAction.pending.type,
+        fetchFilmByIdAction.rejected.type,
+      ]);
+    });
+  });
 
-        expect(extractedActionsTypes).toEqual([
-          fetchFavoriteFilmsAction.pending.type,
-          fetchFavoriteFilmsAction.fulfilled.type,
-        ]);
+  describe('fetchSimilarFilms', () => {
+    it('should dispatch "fetchSimilarFilmsAction.pending", "fetchSimilarFilmsAction.fulfilled", when server response 200', async () => {
+      const mockFilms = [createFilm(), createFilm()];
+      mockAxiosAdapter.onGet('/films/id/similar').reply(200, mockFilms);
 
-        expect(fetchFavoriteFulfilled.payload)
-          .toEqual(mockFilms);
-      });
+      await store.dispatch(fetchSimilarFilmsAction('id'));
 
-      it('should dispatch "fetchFavoriteFilmsAction.pending", "fetchFavoriteFilmsAction.rejected" when server response 400', async () => {
-        mockAxiosAdapter.onGet('/favorite').reply(400);
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchSimilarFilmsFulfilled = emittedActions.at(1) as ReturnType<typeof fetchSimilarFilmsAction.fulfilled>;
 
-        await store.dispatch(fetchFavoriteFilmsAction());
-        const actions = extractActionsTypes(store.getActions());
+      expect(extractedActionsTypes).toEqual([
+        fetchSimilarFilmsAction.pending.type,
+        fetchSimilarFilmsAction.fulfilled.type,
+      ]);
 
-        expect(actions).toEqual([
-          fetchFavoriteFilmsAction.pending.type,
-          fetchFavoriteFilmsAction.rejected.type,
-        ]);
-      });
+      expect(fetchSimilarFilmsFulfilled.payload).toEqual(mockFilms);
     });
 
-    describe('fetchFilmPromoAction', () => {
-      it('should dispatch "fetchFilmPromo.pending", "fetchFilmPromo.fulfilled", when server response 200', async () => {
-        const mockFilm = createPromoFilm();
-        mockAxiosAdapter.onGet('/promo').reply(200, mockFilm);
+    it('should dispatch "fetchSimilarFilmsAction.pending", "fetchSimilarFilmsAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet('/films/id/similar').reply(400);
 
-        await store.dispatch(fetchFilmPromoAction());
+      await store.dispatch(fetchSimilarFilmsAction('id'));
+      const actions = extractActionsTypes(store.getActions());
 
-        const emittedActions = store.getActions();
-        const extractedActionsTypes = extractActionsTypes(emittedActions);
-        const fetchFilmPromoFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFilmPromoAction.fulfilled>;
+      expect(actions).toEqual([
+        fetchSimilarFilmsAction.pending.type,
+        fetchSimilarFilmsAction.rejected.type,
+      ]);
+    });
+  });
 
-        expect(extractedActionsTypes).toEqual([
-          fetchFilmPromoAction.pending.type,
-          fetchFilmPromoAction.fulfilled.type,
-        ]);
+  describe('fetchFavorite', () => {
+    it('should dispatch "fetchFavoriteFilmsAction.pending", "fetchFavoriteFilmsAction.fulfilled", when server response 200', async () => {
+      const mockFilms = [createFilm(), createFilm()];
+      mockAxiosAdapter.onGet('/favorite').reply(200, mockFilms);
 
-        expect(fetchFilmPromoFulfilled.payload).toEqual(mockFilm);
-      });
+      await store.dispatch(fetchFavoriteFilmsAction());
 
-      it('should dispatch "fetchFilmPromoAction.pending", "fetchFilmPromoAction.rejected" when server response 400', async () => {
-        mockAxiosAdapter.onGet('/promo').reply(400);
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchFavoriteFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFavoriteFilmsAction.fulfilled>;
 
-        await store.dispatch(fetchFilmPromoAction());
-        const actions = extractActionsTypes(store.getActions());
+      expect(extractedActionsTypes).toEqual([
+        fetchFavoriteFilmsAction.pending.type,
+        fetchFavoriteFilmsAction.fulfilled.type,
+      ]);
 
-        expect(actions).toEqual([
-          fetchFilmPromoAction.pending.type,
-          fetchFilmPromoAction.rejected.type,
-        ]);
-      });
+      expect(fetchFavoriteFulfilled.payload)
+        .toEqual(mockFilms);
     });
 
-    describe('fetchFilmReviewsAction', () => {
-      it('should dispatch "fetchFilmReviewsAction.pending", "fetchFilmReviewsAction.fulfilled", when server response 200', async () => {
-        const mockReviews = [createReview(), createReview(), createReview()];
-        mockAxiosAdapter.onGet('/comments/id').reply(200, mockReviews);
+    it('should dispatch "fetchFavoriteFilmsAction.pending", "fetchFavoriteFilmsAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet('/favorite').reply(400);
 
-        await store.dispatch(fetchFilmReviewsAction('id'));
+      await store.dispatch(fetchFavoriteFilmsAction());
+      const actions = extractActionsTypes(store.getActions());
 
-        const emittedActions = store.getActions();
-        const extractedActionsTypes = extractActionsTypes(emittedActions);
-        const fetchFilmReviewsFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFilmReviewsAction.fulfilled>;
+      expect(actions).toEqual([
+        fetchFavoriteFilmsAction.pending.type,
+        fetchFavoriteFilmsAction.rejected.type,
+      ]);
+    });
+  });
 
-        expect(extractedActionsTypes).toEqual([
-          fetchFilmReviewsAction.pending.type,
-          fetchFilmReviewsAction.fulfilled.type,
-        ]);
+  describe('fetchFilmPromoAction', () => {
+    it('should dispatch "fetchFilmPromo.pending", "fetchFilmPromo.fulfilled", when server response 200', async () => {
+      const mockFilm = createPromoFilm();
+      mockAxiosAdapter.onGet('/promo').reply(200, mockFilm);
 
-        expect(fetchFilmReviewsFulfilled.payload).toEqual(mockReviews);
-      });
+      await store.dispatch(fetchFilmPromoAction());
 
-      it('should dispatch "fetchFilmReviewsAction.pending", "fetchFilmReviewsAction.rejected" when server response 400', async () => {
-        mockAxiosAdapter.onGet('/comments/id').reply(400);
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchFilmPromoFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFilmPromoAction.fulfilled>;
 
-        await store.dispatch(fetchFilmReviewsAction('id'));
-        const actions = extractActionsTypes(store.getActions());
+      expect(extractedActionsTypes).toEqual([
+        fetchFilmPromoAction.pending.type,
+        fetchFilmPromoAction.fulfilled.type,
+      ]);
 
-        expect(actions).toEqual([
-          fetchFilmReviewsAction.pending.type,
-          fetchFilmReviewsAction.rejected.type,
-        ]);
-      });
+      expect(fetchFilmPromoFulfilled.payload).toEqual(mockFilm);
     });
 
-    describe('addCommentAction', () => {
-      it('should dispatch "addCommentAction.pending", "addCommentAction.fulfilled", when server response 200', async () => {
-        mockAxiosAdapter.onPost('/comments/id').reply(200);
+    it('should dispatch "fetchFilmPromoAction.pending", "fetchFilmPromoAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet('/promo').reply(400);
 
-        await store.dispatch(addCommentAction({filmId: 'id', comment: 'lorem', rating: 8}));
+      await store.dispatch(fetchFilmPromoAction());
+      const actions = extractActionsTypes(store.getActions());
 
-        const actions = extractActionsTypes(store.getActions());
+      expect(actions).toEqual([
+        fetchFilmPromoAction.pending.type,
+        fetchFilmPromoAction.rejected.type,
+      ]);
+    });
+  });
 
-        expect(actions).toEqual([
-          addCommentAction.pending.type,
-          addCommentAction.fulfilled.type,
-        ]);
-      });
+  describe('fetchFilmReviewsAction', () => {
+    it('should dispatch "fetchFilmReviewsAction.pending", "fetchFilmReviewsAction.fulfilled", when server response 200', async () => {
+      const mockReviews = [createReview(), createReview(), createReview()];
+      mockAxiosAdapter.onGet('/comments/id').reply(200, mockReviews);
 
-      it('should dispatch "addCommentAction.pending", "addCommentAction.rejected" when server response 400', async () => {
-        mockAxiosAdapter.onPost('/comments/id').reply(400);
+      await store.dispatch(fetchFilmReviewsAction('id'));
 
-        await store.dispatch(addCommentAction({filmId: 'id', comment: 'lorem', rating: 8}));
-        const actions = extractActionsTypes(store.getActions());
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const fetchFilmReviewsFulfilled = emittedActions.at(1) as ReturnType<typeof fetchFilmReviewsAction.fulfilled>;
 
-        expect(actions).toEqual([
-          addCommentAction.pending.type,
-          addCommentAction.rejected.type,
-        ]);
-      });
+      expect(extractedActionsTypes).toEqual([
+        fetchFilmReviewsAction.pending.type,
+        fetchFilmReviewsAction.fulfilled.type,
+      ]);
+
+      expect(fetchFilmReviewsFulfilled.payload).toEqual(mockReviews);
     });
 
+    it('should dispatch "fetchFilmReviewsAction.pending", "fetchFilmReviewsAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onGet('/comments/id').reply(400);
+
+      await store.dispatch(fetchFilmReviewsAction('id'));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        fetchFilmReviewsAction.pending.type,
+        fetchFilmReviewsAction.rejected.type,
+      ]);
+    });
+  });
+
+  describe('addCommentAction', () => {
+    it('should dispatch "addCommentAction.pending", "addCommentAction.fulfilled", when server response 200', async () => {
+      mockAxiosAdapter.onPost('/comments/id').reply(200);
+
+      await store.dispatch(addCommentAction({filmId: 'id', comment: 'lorem', rating: 8}));
+
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        addCommentAction.pending.type,
+        addCommentAction.fulfilled.type,
+      ]);
+    });
+
+    it('should dispatch "addCommentAction.pending", "addCommentAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost('/comments/id').reply(400);
+
+      await store.dispatch(addCommentAction({filmId: 'id', comment: 'lorem', rating: 8}));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        addCommentAction.pending.type,
+        addCommentAction.rejected.type,
+      ]);
+    });
+  });
+
+  describe('changeFavoriteStatusAction', () => {
+    it('should dispatch "changeFavoriteStatusAction.pending", "changeFavoriteStatusAction.fulfilled", when server response 200', async () => {
+      mockAxiosAdapter.onPost(`/favorite/id/${FavoriteStatus.Favorite}`).reply(200);
+
+      await store.dispatch(changeFavoriteStatusAction({filmId: 'id', status: FavoriteStatus.Favorite}));
+
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        changeFavoriteStatusAction.pending.type,
+        changeFavoriteStatusAction.fulfilled.type,
+      ]);
+    });
+
+    it('should dispatch "changeFavoriteStatusAction.pending", "changeFavoriteStatusAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost(`/favorite/id/${FavoriteStatus.Favorite}`).reply(400);
+
+      await store.dispatch(changeFavoriteStatusAction({filmId: 'id', status: FavoriteStatus.Favorite}));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        changeFavoriteStatusAction.pending.type,
+        changeFavoriteStatusAction.rejected.type,
+      ]);
+    });
   });
 });

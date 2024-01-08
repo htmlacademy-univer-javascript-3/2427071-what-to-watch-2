@@ -1,5 +1,5 @@
 import React from 'react';
-import { IFilmPromoInfo } from '../../types/film-types.ts';
+import { IFilmPromoInfo } from '../../types/film-types';
 
 type OverviewProps = {
   film: IFilmPromoInfo;
@@ -11,7 +11,6 @@ function Overview({ film }: OverviewProps): React.JSX.Element {
         <div className="film-rating__score">{film.rating}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">Very good</span>
-          {/*<span className="film-rating__level">{filmRating}</span>*/}
           <span className="film-rating__count">{film.scoresCount} ratings</span>
         </p>
       </div>

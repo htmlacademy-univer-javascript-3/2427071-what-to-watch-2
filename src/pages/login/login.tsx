@@ -1,9 +1,12 @@
 import React, {FormEvent, useRef, useState} from 'react';
+import { Navigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import {EMAIL_PATTERN, PASSWORD_PATTERN} from '../../constants/validation-patterns.ts';
-import {useAppDispatch} from '../../hooks/store.ts';
+import {AuthStatus} from '../../enums/auth-status.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {loginAction} from '../../store/api-actions.ts';
+import {getAuthStatus} from '../../store/user-process/user-process.selectors.ts';
 
 function Login(): React.JSX.Element {
   const [error, setError] = useState('');
@@ -11,6 +14,9 @@ function Login(): React.JSX.Element {
 
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const authStatus = useAppSelector(getAuthStatus);
+  const isAuth = authStatus === AuthStatus.Auth;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,6 +43,10 @@ function Login(): React.JSX.Element {
     }
   };
 
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -50,13 +60,6 @@ function Login(): React.JSX.Element {
               <p>{error}</p>
             </div>
           )}
-          {/* Для дальнейшей разработки страницы
-          <div className="sign-in__message">
-            <p>
-              We can’t recognize this email <br /> and password combination.
-              Please try again.
-            </p>
-          </div>*/}
           <div className="sign-in__fields">
             <div
               className={`sign-in__field ${
@@ -70,6 +73,7 @@ function Login(): React.JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                data-testid="login-element"
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -90,6 +94,7 @@ function Login(): React.JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                data-testid="password-element"
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -100,7 +105,7 @@ function Login(): React.JSX.Element {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">
+            <button className="sign-in__btn" type="submit" data-testid="log-in-btn">
               Sign in
             </button>
           </div>

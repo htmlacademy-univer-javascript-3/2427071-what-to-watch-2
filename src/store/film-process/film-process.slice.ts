@@ -1,10 +1,10 @@
-import {FilmProcessState} from '../../types/state.ts';
+import {FilmProcessState} from '../../types/state';
 import {createSlice} from '@reduxjs/toolkit';
-import {NameSpace} from '../../constants/namespaces.ts';
+import {NameSpace} from '../../enums/namespace';
 import {
   fetchFilmByIdAction,
   fetchFilmReviewsAction, fetchSimilarFilmsAction,
-} from '../api-actions.ts';
+} from '../api-actions';
 
 const initialState: FilmProcessState = {
   currentFilm: null,

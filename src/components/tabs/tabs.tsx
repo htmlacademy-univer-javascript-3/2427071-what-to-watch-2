@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { IFilmPromoInfo } from '../../types/film-types.ts';
-import Overview from '../overview/overview.tsx';
+import { IFilmPromoInfo } from '../../types/film-types';
+import Overview from '../overview/overview';
 import Details from '../film-details/film-details';
 import Reviews from '../film-reviews/film-reviews';
-import { IReview } from '../../types/review-types.ts';
+import { IReview } from '../../types/review-types';
 
 const TABS = ['Overview', 'Details', 'Reviews'] as const;
 
@@ -25,7 +25,15 @@ function Tabs({ film, reviews }: TabsProps): React.JSX.Element {
   );
 
   useEffect(() => {
-    setActiveTab(TABS[0]);
+    let isMounted = true;
+
+    if (isMounted) {
+      setActiveTab(TABS[0]);
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [film.id]);
 
   const component = useMemo(() => {

@@ -1,6 +1,6 @@
 import {State} from '../../types/state.ts';
 import {CheckUserData, UserData} from '../../types/auth.ts';
-import {NameSpace} from '../../constants/namespaces.ts';
+import {NameSpace} from '../../enums/namespace.ts';
 import {AuthStatus} from '../../enums/auth-status.ts';
 
 export const getAuthStatus = (state: Pick<State, NameSpace.User>): AuthStatus => state[NameSpace.User].authorizationStatus;

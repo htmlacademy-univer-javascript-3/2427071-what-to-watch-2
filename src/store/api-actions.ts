@@ -1,12 +1,12 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppDispatch, State} from '../types/state.ts';
+import {AppDispatch, State} from '../types/state';
 import {AxiosInstance} from 'axios';
-import {IFilm, IFilmPromo, IFilmPromoInfo} from '../types/film-types.ts';
-import {redirectToRoute} from './action.ts';
-import {AddUserReview, IReview, UserReview} from '../types/review-types.ts';
-import {AppRoute} from '../enums/app-route.ts';
-import {AuthData, UserData} from '../types/auth.ts';
-import { FavoriteStatus } from '../enums/favorite-status.ts';
+import {IFilm, IFilmPromo, IFilmPromoInfo} from '../types/film-types';
+import {redirectToRoute} from './action';
+import {AddUserReview, IReview, UserReview} from '../types/review-types';
+import {AppRoute} from '../enums/app-route';
+import {AuthData, UserData} from '../types/auth';
+import { FavoriteStatus } from '../enums/favorite-status';
 
 export const loginAction = createAsyncThunk<
   UserData,
@@ -17,7 +17,7 @@ export const loginAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >(
-  '/login',
+  'USER/login',
   async ({email, password}, { dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(
       AppRoute.Login,
@@ -42,7 +42,7 @@ export const logoutAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >(
-  '/logout',
+  'USER/logout',
   async (_arg, { extra: api}) => {
     await api.delete(AppRoute.Logout);
   },
@@ -57,9 +57,10 @@ export const checkAuthStatusAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >(
-  'user/login',
+  'USER/checkAuth',
   async (_arg, { extra: api}) => {
     const {data} = await api.get<UserData>(AppRoute.Login);
+
     return data;
   },
 );
@@ -69,7 +70,7 @@ export const fetchFilmsAction = createAsyncThunk<IFilm[], undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  '/films',
+  'FILMS/getFilms',
   async (_arg, {extra: api}) => {
     const { data } = await api.get<IFilm[]>(AppRoute.Films);
 
@@ -85,7 +86,7 @@ export const fetchFilmByIdAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }>(
-    '/films/id',
+    'FILMS/getFilmById',
     async (id: string, { extra: api}) => {
 
       const { data } = await api.get<IFilmPromoInfo>(`${AppRoute.Films}/${id}`);
@@ -102,7 +103,7 @@ export const fetchSimilarFilmsAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }>(
-    '/films/id/similar',
+    'FILMS/fetchSimilarFilms',
     async (id: string, { extra: api}) => {
 
       const { data } = await api.get<IFilm[]>(`${AppRoute.Films}/${id}/similar`);
@@ -120,10 +121,11 @@ export const fetchFavoriteFilmsAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }>(
-    '/favorite',
+    'FILMS/fetchFavoriteFilms',
     async (_arg, { extra: api}) => {
 
       const {data} = await api.get<IFilm[]>('/favorite');
+
       return data;
 
     }
@@ -137,9 +139,10 @@ export const fetchFilmPromoAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }>(
-    '/promo',
+    'FILMS/fetchPromoFilm',
     async (_arg, { extra: api}) => {
       const { data } = await api.get<IFilmPromo>('/promo');
+
       return data;
     },
   );
@@ -152,7 +155,7 @@ export const fetchFilmReviewsAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }>(
-    '/comments/id',
+    'FILM/getReviews',
     async (id, {extra: api}) => {
 
       const { data } = await api.get<IReview[]>(`/comments/${id}`);
@@ -167,13 +170,12 @@ export const addCommentAction = createAsyncThunk<void, AddUserReview, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'addCommentAction',
+  'FILM/addComment',
   async ({filmId, comment, rating}, {extra: api}) => {
     await api.post<UserReview>(`comments/${filmId}`, {comment, rating});
   },
 );
 
-// TODO add tests
 export const changeFavoriteStatusAction = createAsyncThunk<
   void,
   {filmId: string; status: FavoriteStatus},
@@ -182,7 +184,7 @@ export const changeFavoriteStatusAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }>(
-    'favorite/status',
+    'FILM/changeFavoriteStatus',
     async ({filmId, status}, { extra: api}) => {
       await api.post(`/favorite/${filmId}/${status}`);
     },

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import {DEFAULT_AUTOPLAY_TIME} from '../../constants/time.ts';
 
 interface VideoPlayerProps {
   link: string;
@@ -13,9 +14,21 @@ export default function VideoPlayer({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      videoRef.current?.play();
-    }, 1000);
+    let isMounted = true;
+
+    if (isMounted) {
+      if (!videoRef.current) {
+        return;
+      }
+
+      setTimeout(() => {
+        videoRef.current?.play();
+      }, DEFAULT_AUTOPLAY_TIME);
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -26,6 +39,7 @@ export default function VideoPlayer({
       muted={isMuted}
       className="player__video"
       loop
+      data-testid="video-player"
     >
       <source src={link} type="video/mp4" />
     </video>

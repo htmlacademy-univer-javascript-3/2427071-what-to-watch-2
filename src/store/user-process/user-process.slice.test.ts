@@ -1,6 +1,6 @@
-import {AuthStatus} from '../../enums/auth-status.ts';
-import {createUser} from '../../mocks/mocks.ts';
-import {UserProcessState} from '../../types/state.ts';
+import {AuthStatus} from '../../enums/auth-status';
+import {createUser} from '../../utils/mocks';
+import {UserProcessState} from '../../types/state';
 import { checkAuthStatusAction, loginAction, logoutAction } from '../api-actions';
 import { userProcessSlice } from './user-process.slice';
 
@@ -52,7 +52,8 @@ describe('User process slice', () => {
         .toEqual(initialState);
     });
   });
-  describe('checkASuthStatus test', () => {
+
+  describe('checkAuthStatus test', () => {
     const user = createUser;
     const expectedState = {
       user,

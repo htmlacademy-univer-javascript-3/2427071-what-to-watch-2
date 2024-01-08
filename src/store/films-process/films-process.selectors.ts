@@ -1,5 +1,5 @@
 import {State} from '../../types/state.ts';
-import {NameSpace} from '../../constants/namespaces.ts';
+import {NameSpace} from '../../enums/namespace.ts';
 import {IFilm, IFilmPromo} from '../../types/film-types.ts';
 
 export const getFilms = (state: Pick<State, NameSpace.Films>): IFilm[] => state[NameSpace.Films].films;

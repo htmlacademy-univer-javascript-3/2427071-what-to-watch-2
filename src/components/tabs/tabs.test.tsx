@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import {createCurrentFilm} from '../../mocks/mocks.ts';
+import {createCurrentFilm} from '../../utils/mocks';
 import Tabs from './tabs';
 
 describe('Component: Tabs', () => {

@@ -1,4 +1,5 @@
 import React, {ChangeEvent, FormEvent, Fragment, useCallback, useState} from 'react';
+import {MAX_REVIEW, MIN_REVIEW, RATINGS} from '../../constants/review.ts';
 import {useAppDispatch} from '../../hooks/store.ts';
 import {addCommentAction} from '../../store/api-actions.ts';
 import {Navigate, useNavigate} from 'react-router-dom';
@@ -11,12 +12,19 @@ type ReviewFormProps = {
 
 function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   const [review, setReview] = useState({
     ...DEFAULT_FORM_VALUE,
   });
+
+  const [serverError, setServerError] = useState('');
+
+  const dispatch = useAppDispatch();
+
+  const isSubmitButtonDisabled =
+    !review.rating ||
+    !review.comment ||
+    review.comment.length < MIN_REVIEW ||
+    review.comment.length > MAX_REVIEW;
 
   const handleRatingChange = useCallback(
     (evt: ChangeEvent<HTMLInputElement>) => {
@@ -41,21 +49,28 @@ function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
   const handleSubmit = useCallback(
     (evt: FormEvent<HTMLFormElement>) => {
       evt.preventDefault();
+
+      setServerError('');
+
       dispatch(
         addCommentAction({
           filmId: filmId,
           comment: review.comment,
           rating: review.rating,
         })
-      ).then(() => {
-        navigate(`/films/${filmId}`);
-      });
+      )
+        .then(() => {
+          navigate(`/films/${filmId}`);
+        })
+        .catch(() => {
+          setServerError('Ошибка сервера');
+        });
     },
     [dispatch, filmId, navigate, review]
   );
 
   if (!filmId) {
-    return <Navigate to={AppRoute.NotFound}/>;
+    return <Navigate to={AppRoute.NotFound} />;
   }
 
   return (
@@ -94,11 +109,17 @@ function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
             <button
               className="add-review__btn"
               type="submit"
+              disabled={isSubmitButtonDisabled}
             >
               Post
             </button>
           </div>
         </div>
+        {serverError && (
+          <div className="add-review__field--error">
+            <p>{serverError}</p>
+          </div>
+        )}
       </form>
     </div>
   );

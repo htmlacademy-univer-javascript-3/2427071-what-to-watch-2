@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFilmByIdAction} from '../../store/api-actions.ts';
 import {getFilm, getIsLoadingFilm} from '../../store/film-process/film-process.selectors.ts';
 import { Spinner } from '../../components/spinner/spinner.tsx';
-import { calcRemainingTime } from '../../utils/formatTime.ts';
+import { calcRemainingTime } from '../../utils/format-time.ts';
 import PageNotFound from '../page-not-found/page-not-found.tsx';
 
 function Player(): React.JSX.Element {
@@ -46,7 +46,7 @@ function Player(): React.JSX.Element {
     setTimeLeft(calcRemainingTime(duration, currentTime));
   };
 
-  const handleFullSrceen = () => {
+  const handleFullScreen = () => {
     if (videoRef.current === null) {
       return;
     }
@@ -68,9 +68,17 @@ function Player(): React.JSX.Element {
   }, [navigate]);
 
   useEffect(() => {
-    if (id && id !== film?.id) {
-      dispatch(fetchFilmByIdAction(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (id && id !== film?.id) {
+        dispatch(fetchFilmByIdAction(id));
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [id, dispatch, film?.id]);
 
   if (isLoading) {
@@ -120,7 +128,7 @@ function Player(): React.JSX.Element {
             <span>{isPlaying ? 'Pause' : 'Play'}</span>
           </button>
           <div className="player__name">Transpotting</div>
-          <button type="button" className="player__full-screen" onClick={handleFullSrceen}>
+          <button type="button" className="player__full-screen" onClick={handleFullScreen}>
             <svg viewBox="0 0 27 27" width={27} height={27}>
               <use xlinkHref="#full-screen" />
             </svg>

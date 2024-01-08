@@ -19,11 +19,15 @@ function Card({ film, isActive = false, isMuted = true, onMouseEnter, onMouseLea
     onMouseEnter(id);
   }, [id, onMouseEnter]);
 
+  const handleMouseLeave = useCallback(() => {
+    onMouseLeave();
+  }, [onMouseLeave]);
+
   return (
     <article
       className="small-film-card catalog__films-card"
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseLeave={handleMouseLeave}
       data-active={isActive}
     >
       <div className="small-film-card__image">

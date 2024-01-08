@@ -1,7 +1,7 @@
-import { NameSpace } from '../../constants/namespaces';
-import {AuthStatus} from '../../enums/auth-status.ts';
-import {createUser} from '../../mocks/mocks.ts';
-import {getAuthStatus, getUser} from './user-process.selectors.ts';
+import { NameSpace } from '../../enums/namespace';
+import {AuthStatus} from '../../enums/auth-status';
+import {createUser} from '../../utils/mocks';
+import {getAuthStatus, getUser} from './user-process.selectors';
 
 describe('User process selectors Test', () => {
   const state = {

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import {createReview} from '../../mocks/mocks.ts';
+import {createReview} from '../../utils/mocks';
 import FilmReviews from './film-reviews';
 
 describe('Component: FilmReviews', () => {

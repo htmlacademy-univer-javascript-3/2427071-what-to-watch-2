@@ -1,5 +1,5 @@
-import { NameSpace } from '../../constants/namespaces.ts';
-import {createCurrentFilm, createFilm, createReview} from '../../mocks/mocks.ts';
+import { NameSpace } from '../../enums/namespace.ts';
+import {createCurrentFilm, createFilm, createReview} from '../../utils/mocks';
 import {getFilm, getIsLoadingFilm, getReviews} from './film-process.selectors.ts';
 
 describe('Film process selectors Test', () => {
