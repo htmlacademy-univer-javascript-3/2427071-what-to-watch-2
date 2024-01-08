@@ -50,13 +50,6 @@ function Login(): React.JSX.Element {
               <p>{error}</p>
             </div>
           )}
-          {/* Для дальнейшей разработки страницы
-          <div className="sign-in__message">
-            <p>
-              We can’t recognize this email <br /> and password combination.
-              Please try again.
-            </p>
-          </div>*/}
           <div className="sign-in__fields">
             <div
               className={`sign-in__field ${

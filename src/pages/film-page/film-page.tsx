@@ -15,7 +15,7 @@ import {getAuthStatus} from '../../store/user-process/user-process.selectors.ts'
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons.tsx';
 import { getFavoriteFilms } from '../../store/films-process/films-process.selectors.ts';
 
-function MoviePage(): React.JSX.Element {
+function FilmPage(): React.JSX.Element {
   const { id = '' } = useParams();
 
   const dispatch = useAppDispatch();
@@ -88,4 +88,4 @@ function MoviePage(): React.JSX.Element {
   );
 }
 
-export default MoviePage;
+export default FilmPage;

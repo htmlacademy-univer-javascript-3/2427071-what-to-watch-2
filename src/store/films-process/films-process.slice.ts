@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {NameSpace} from '../../constants/namespaces.ts';
+import {NameSpace} from '../../enums/namespace.ts';
 import {ALL_GENRES} from '../../constants/genres.ts';
 import {FilmsProcessState} from '../../types/state.ts';
 import {fetchFavoriteFilmsAction, fetchFilmPromoAction, fetchFilmsAction} from '../api-actions.ts';

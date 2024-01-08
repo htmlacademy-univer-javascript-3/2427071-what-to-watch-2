@@ -52,6 +52,10 @@ function FilmCardButtons({
     }
   }, [params.id, dispatch, id]);
 
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+  }, [dispatch]);
+
   return (
     <div className="film-card__buttons">
       <Link

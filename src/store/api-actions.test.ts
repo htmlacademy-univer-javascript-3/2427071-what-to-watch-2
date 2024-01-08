@@ -14,8 +14,8 @@ import {
   createPromoFilm,
   createReview,
   extractActionsTypes
-} from '../mocks/mocks.ts';
-import {redirectToRoute} from './action.ts';
+} from '../utils/mocks';
+import {redirectToRoute} from './action';
 import {
   addCommentAction, changeFavoriteStatusAction,
   checkAuthStatusAction,
@@ -23,7 +23,7 @@ import {
   fetchFilmByIdAction, fetchFilmPromoAction, fetchFilmReviewsAction,
   fetchFilmsAction,
   fetchSimilarFilmsAction, loginAction, logoutAction
-} from './api-actions.ts';
+} from './api-actions';
 
 describe('Api actions', () => {
   const axios = createApi();

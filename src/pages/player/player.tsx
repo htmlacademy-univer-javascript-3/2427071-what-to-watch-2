@@ -46,7 +46,7 @@ function Player(): React.JSX.Element {
     setTimeLeft(calcRemainingTime(duration, currentTime));
   };
 
-  const handleFullSrceen = () => {
+  const handleFullScreen = () => {
     if (videoRef.current === null) {
       return;
     }
@@ -120,7 +120,7 @@ function Player(): React.JSX.Element {
             <span>{isPlaying ? 'Pause' : 'Play'}</span>
           </button>
           <div className="player__name">Transpotting</div>
-          <button type="button" className="player__full-screen" onClick={handleFullSrceen}>
+          <button type="button" className="player__full-screen" onClick={handleFullScreen}>
             <svg viewBox="0 0 27 27" width={27} height={27}>
               <use xlinkHref="#full-screen" />
             </svg>

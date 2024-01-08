@@ -1,6 +1,6 @@
 import { ALL_GENRES } from '../../constants/genres';
-import { NameSpace } from '../../constants/namespaces';
-import {createFilm, createPromoFilm} from '../../mocks/mocks.ts';
+import { NameSpace } from '../../enums/namespace.ts';
+import {createFilm, createPromoFilm} from '../../utils/mocks';
 import {
   getActiveGenre,
   getFavoriteFilms,

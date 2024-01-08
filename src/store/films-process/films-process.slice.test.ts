@@ -1,6 +1,6 @@
 import * as faker from 'faker';
 import {ALL_GENRES} from '../../constants/genres';
-import {createFilm, createPromoFilm} from '../../mocks/mocks.ts';
+import {createFilm, createPromoFilm} from '../../utils/mocks';
 import {FilmsProcessState} from '../../types/state';
 import {fetchFavoriteFilmsAction, fetchFilmPromoAction, fetchFilmsAction} from '../api-actions';
 import {filmsProcessSlice, setActiveGenre, setFilmsByGenre} from './films-process.slice';

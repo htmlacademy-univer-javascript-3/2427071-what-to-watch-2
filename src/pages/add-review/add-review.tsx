@@ -6,10 +6,10 @@ import './add-review.css';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import { AppRoute } from '../../enums/app-route';
 import MovieCardPoster from '../../components/film-card-poster/film-card-poster.tsx';
-import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
-import {fetchFilmByIdAction} from '../../store/api-actions.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/store';
+import {fetchFilmByIdAction} from '../../store/api-actions';
 import {Spinner} from '../../components/spinner/spinner.tsx';
-import {getFilm, getIsLoadingFilm} from '../../store/film-process/film-process.selectors.ts';
+import {getFilm, getIsLoadingFilm} from '../../store/film-process/film-process.selectors';
 
 export default function AddReview(): React.JSX.Element {
   const { id = '' } = useParams();

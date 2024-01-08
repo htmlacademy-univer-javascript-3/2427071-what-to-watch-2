@@ -1,5 +1,4 @@
-const SEC_PER_HOUR = 3600;
-const SEC_PER_MINUTE = 60;
+import {SEC_PER_HOUR, SEC_PER_MINUTE} from '../constants/time';
 
 export const formatRunTime = (runTime: number) => {
   const hours = Math.floor(runTime / SEC_PER_HOUR);

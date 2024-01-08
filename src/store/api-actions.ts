@@ -1,12 +1,14 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppDispatch, State} from '../types/state.ts';
+import {AuthStatus} from '../enums/auth-status';
+import {AppDispatch, State} from '../types/state';
 import {AxiosInstance} from 'axios';
-import {IFilm, IFilmPromo, IFilmPromoInfo} from '../types/film-types.ts';
-import {redirectToRoute} from './action.ts';
-import {AddUserReview, IReview, UserReview} from '../types/review-types.ts';
-import {AppRoute} from '../enums/app-route.ts';
-import {AuthData, UserData} from '../types/auth.ts';
-import { FavoriteStatus } from '../enums/favorite-status.ts';
+import {IFilm, IFilmPromo, IFilmPromoInfo} from '../types/film-types';
+import {redirectToRoute} from './action';
+import {AddUserReview, IReview, UserReview} from '../types/review-types';
+import {AppRoute} from '../enums/app-route';
+import {AuthData, UserData} from '../types/auth';
+import { FavoriteStatus } from '../enums/favorite-status';
+import { setAuthStatus } from './user-process/user-process.slice';
 
 export const loginAction = createAsyncThunk<
   UserData,
@@ -60,6 +62,7 @@ export const checkAuthStatusAction = createAsyncThunk<
   'user/login',
   async (_arg, { extra: api}) => {
     const {data} = await api.get<UserData>(AppRoute.Login);
+    setAuthStatus(data ? AuthStatus.Auth : AuthStatus.NoAuth);
 
     return data;
   },

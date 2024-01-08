@@ -1,4 +1,4 @@
-import {createFilm, createReview} from '../../mocks/mocks.ts';
+import {createFilm, createReview} from '../../utils/mocks';
 import {FilmProcessState} from '../../types/state';
 import {fetchFilmByIdAction, fetchFilmReviewsAction, fetchSimilarFilmsAction} from '../api-actions';
 import {filmProcessSlice} from './film-process.slice';

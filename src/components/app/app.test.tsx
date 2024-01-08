@@ -3,7 +3,7 @@ import { MemoryHistory, createMemoryHistory } from 'history';
 import {ALL_GENRES} from '../../constants/genres.ts';
 import {AppRoute} from '../../enums/app-route.ts';
 import {AuthStatus} from '../../enums/auth-status.ts';
-import {createCurrentFilm, createFilm, createPromoFilm, createUser} from '../../mocks/mocks.ts';
+import {createCurrentFilm, createFilm, createPromoFilm, createUser} from '../../utils/mocks';
 import App from './app';
 import { withHistory, withStore } from '../../utils/mock-component';
 import { createFakeStore } from '../../utils/mocks';
