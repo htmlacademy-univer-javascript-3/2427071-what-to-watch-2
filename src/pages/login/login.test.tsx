@@ -2,13 +2,14 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {internet} from 'faker';
 import { withHistory, withStore } from '../../utils/mock-component';
+import {createFakeStore} from '../../utils/mocks.ts';
 import Login from './login.tsx';
 
 describe('Component: Login', () => {
   it('should render correctly', () => {
     const loginText = 'Email address';
     const passwordText = 'Password';
-    const { withStoreComponent } = withStore(<Login />, {});
+    const { withStoreComponent } = withStore(<Login />, createFakeStore());
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -25,7 +26,7 @@ describe('Component: Login', () => {
     const passwordElementTestId = 'password-element';
     const expectedLoginValue = internet.userName();
     const expectedPasswordValue = internet.password();
-    const { withStoreComponent } = withStore(<Login />, {});
+    const { withStoreComponent } = withStore(<Login />, createFakeStore());
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
