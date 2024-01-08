@@ -26,6 +26,7 @@ export default function VideoPlayer({
       muted={isMuted}
       className="player__video"
       loop
+      data-testid="video-player"
     >
       <source src={link} type="video/mp4" />
     </video>

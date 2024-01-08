@@ -70,6 +70,7 @@ function Login(): React.JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                data-testid="login-element"
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -90,6 +91,7 @@ function Login(): React.JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                data-testid="password-element"
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -100,7 +102,7 @@ function Login(): React.JSX.Element {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">
+            <button className="sign-in__btn" type="submit" data-testid="log-in-btn">
               Sign in
             </button>
           </div>

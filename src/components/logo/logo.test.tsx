@@ -29,4 +29,16 @@ describe('Component: Logo', () => {
     expect(logoChars[1]).toHaveTextContent('T');
     expect(logoChars[2]).toHaveTextContent('W');
   });
+
+  it('should render class correctly', () => {
+    render(
+      <BrowserRouter>
+        <Logo isLight />
+      </BrowserRouter>
+    );
+
+    const element = screen.getByTestId('logo');
+
+    expect(element).toHaveClass('logo__link--light');
+  });
 });

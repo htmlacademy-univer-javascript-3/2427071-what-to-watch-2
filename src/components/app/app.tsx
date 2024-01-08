@@ -1,5 +1,7 @@
 import React from 'react';
+import {HelmetProvider} from 'react-helmet-async';
 import {Routes, Route} from 'react-router-dom';
+import {useAppSelector} from '../../hooks/store.ts';
 import MainPage from '../../pages/main/main-page';
 import MyList from '../../pages/my-list/my-list';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
@@ -8,15 +10,15 @@ import SignIn from '../../pages/login/login';
 import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
 import {AppRoute} from '../../enums/app-route';
+import {getAuthStatus} from '../../store/user-process/user-process.selectors.ts';
 import PrivateRoute from '../private-route/private-route';
-import HistoryRouter from '../history-router/history-router.tsx';
-import browserHistory from '../../browser-history.ts';
 import ScrollTop from '../scroll-top/scroll-top.tsx';
 
 function App(): React.JSX.Element {
+  const authStatus = useAppSelector(getAuthStatus);
 
   return (
-    <HistoryRouter history={browserHistory}>
+    <HelmetProvider>
       <ScrollTop/>
       <Routes>
         <Route path={AppRoute.Main}>
@@ -30,7 +32,7 @@ function App(): React.JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute>
+              <PrivateRoute authStatus={authStatus}>
                 <MyList/>
               </PrivateRoute>
             }
@@ -40,7 +42,7 @@ function App(): React.JSX.Element {
             <Route
               path={`:id${AppRoute.Review}`}
               element={
-                <PrivateRoute>
+                <PrivateRoute authStatus={authStatus}>
                   <AddReview />
                 </PrivateRoute>
               }
@@ -50,7 +52,7 @@ function App(): React.JSX.Element {
         </Route>
         <Route path="*" element={<PageNotFound/>}/>
       </Routes>
-    </HistoryRouter>
+    </HelmetProvider>
   );
 }
 
