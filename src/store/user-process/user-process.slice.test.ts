@@ -52,7 +52,8 @@ describe('User process slice', () => {
         .toEqual(initialState);
     });
   });
-  describe('checkASuthStatus test', () => {
+
+  describe('checkAuthStatus test', () => {
     const user = createUser;
     const expectedState = {
       user,

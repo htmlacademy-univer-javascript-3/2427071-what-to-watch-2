@@ -32,10 +32,12 @@ export const userProcessSlice = createSlice({
       })
       .addCase(checkAuthStatusAction.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.authorizationStatus = AuthStatus.Auth;
       })
       .addCase(checkAuthStatusAction.rejected, (state) => {
-        removeToken();
+        // removeToken();
         state.user = null;
+        state.authorizationStatus = AuthStatus.NoAuth;
       });
   }
 });
