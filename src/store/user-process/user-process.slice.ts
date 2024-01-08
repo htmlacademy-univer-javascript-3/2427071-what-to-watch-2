@@ -8,6 +8,7 @@ import {removeToken, setToken} from '../../services/token';
 const initialState: UserProcessState = {
   authorizationStatus: AuthStatus.Unknown,
   user: null,
+  hasError: false,
 };
 
 export const userProcessSlice = createSlice({
@@ -24,11 +25,18 @@ export const userProcessSlice = createSlice({
         removeToken();
         state.user = null;
         state.authorizationStatus = AuthStatus.NoAuth;
+        state.hasError = false;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
         setToken(action.payload.token);
         state.user = action.payload;
         state.authorizationStatus = AuthStatus.Auth;
+        state.hasError = false;
+      })
+      .addCase(logoutAction.rejected, (state) => {
+        state.user = null;
+        state.authorizationStatus = AuthStatus.NoAuth;
+        state.hasError = true;
       })
       .addCase(checkAuthStatusAction.fulfilled, (state, action) => {
         state.user = action.payload;

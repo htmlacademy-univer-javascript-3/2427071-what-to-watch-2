@@ -63,6 +63,7 @@ describe('Component: App', () => {
         USER: {
           authorizationStatus: AuthStatus.Auth,
           user: createUser,
+          hasError: false,
         },
         FILMS: {
           films: [],
@@ -92,6 +93,7 @@ describe('Component: App', () => {
         USER: {
           authorizationStatus: AuthStatus.Auth,
           user: createUser,
+          hasError: false,
         },
         FILM: {
           currentFilm: fakeFilm,
@@ -122,6 +124,7 @@ describe('Component: App', () => {
         USER: {
           authorizationStatus: AuthStatus.Auth,
           user: createUser,
+          hasError: false,
         },
         FILM: {
           currentFilm: fakeFilm,

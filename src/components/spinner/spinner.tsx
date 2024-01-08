@@ -1,9 +1,13 @@
 import { RotatingLines } from 'react-loader-spinner';
 import React from 'react';
 
-export function Spinner(): React.JSX.Element {
+interface SpinnerProps {
+  size?: string;
+}
+
+export function Spinner({ size = 'small' }: SpinnerProps): React.JSX.Element {
   return (
-    <div className="spinner-container" data-testid="spinner">
+    <div className={`spinner-container spinner-container--${size}`} data-testid="spinner">
       <RotatingLines
         strokeColor="grey"
         strokeWidth="5"
