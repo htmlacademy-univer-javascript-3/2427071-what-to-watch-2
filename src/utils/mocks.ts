@@ -25,7 +25,7 @@ export const createUser = {
   id: datatype.number(),
   email: internet.email(),
   token: datatype.uuid(),
-  name: name.title(),
+  name: name.firstName(),
   avatarUrl: internet.url(),
 } as UserData;
 
@@ -34,7 +34,7 @@ export const createFilm = (): IFilm => ({
   name: name.title(),
   previewImage: internet.url(),
   previewVideoLink: internet.url(),
-  genre: name.title(),
+  genre: name.gender(),
   alt: name.title(),
 } as IFilm);
 
@@ -52,7 +52,7 @@ export const createCurrentFilm = (): IFilmPromoInfo => ({
   description: lorem.words(10),
   rating: datatype.number(),
   scoresCount: datatype.number(),
-  director: name.title(),
+  director: name.firstName(),
   starring: [name.title()],
   runTime: datatype.number(),
 } as IFilmPromoInfo);
