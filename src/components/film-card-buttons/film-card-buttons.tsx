@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../enums/app-route';
-import {ButtonSize} from '../../enums/buttons.ts';
+import {ButtonSize, SmallButtonSize} from '../../enums/buttons.ts';
 import { FavoriteStatus } from '../../enums/favorite-status';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import { changeFavoriteStatusAction, fetchFavoriteFilmsAction, fetchFilmByIdAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
@@ -55,6 +55,7 @@ function FilmCardButtons({
         dispatch(fetchFilmReviewsAction(params.id));
       }
     }
+
     return () => {
       isMounted = false;
     };
@@ -78,7 +79,11 @@ function FilmCardButtons({
         type="button"
         to={`${AppRoute.Player}/${id}`}
       >
-        <svg viewBox="0 0 19 19" width={ButtonSize.WIDTH} height={ButtonSize.HEIGHT}>
+        <svg
+          viewBox="0 0 19 19"
+          width={ButtonSize.WIDTH}
+          height={ButtonSize.HEIGHT}
+        >
           <use xlinkHref="#play-s" />
         </svg>
         <span>Play</span>
@@ -89,27 +94,23 @@ function FilmCardButtons({
         onClick={handleChangeFavorite}
       >
         {isFavorite ? (
-          <svg viewBox="0 0 18 14" width={ButtonSize.WIDTH} height={ButtonSize.HEIGHT}>
+          <svg
+            viewBox="0 0 18 14"
+            width={SmallButtonSize.WIDTH}
+            height={SmallButtonSize.HEIGHT}
+          >
             <use xlinkHref="#in-list"></use>
           </svg>
         ) : (
-          <svg viewBox="0 0 19 20" width={ButtonSize.WIDTH} height={ButtonSize.HEIGHT}>
+          <svg
+            viewBox="0 0 19 20"
+            width={ButtonSize.WIDTH}
+            height={ButtonSize.HEIGHT}
+          >
             <use xlinkHref="#add"></use>
           </svg>
         )}
-        {isAuth ? (
-          <Link
-            to={`${AppRoute.MyList}`}
-            className="film-card__link"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            My list
-          </Link>
-        ) : (
-          <span>My list</span>
-        )}
+        <span>My list</span>
         <span className="film-card__count">{favoriteFilmsCount}</span>
       </button>
       {isAuth && isReviewButtonVisible && (
@@ -123,5 +124,6 @@ function FilmCardButtons({
     </div>
   );
 }
+
 
 export default FilmCardButtons;

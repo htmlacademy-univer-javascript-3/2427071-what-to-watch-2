@@ -22,16 +22,19 @@ function UserBlock(): React.JSX.Element {
     <ul className="user-block">
       <li className="user-block__item">
         <div className="user-block__avatar">
-          <img
-            src={user?.avatarUrl || 'img/avatar.jpg'}
-            alt={user?.name || 'User avatar'}
-          />
+          {isAuth && user ? (
+            <Link to={`${AppRoute.MyList}`} className="user-block__link">
+              <img src={user.avatarUrl} alt="User" />
+            </Link>
+          ) : (
+            <img src="img/avatar.jpg" alt="User avatar" />
+          )}
         </div>
       </li>
       <li className="user-block__item">
         {isAuth ? (
           <Link
-            to={`${AppRoute.Main}`}
+            to={`${AppRoute.Login}`}
             className="user-block__link"
             onClick={handleClick}
           >
@@ -39,7 +42,7 @@ function UserBlock(): React.JSX.Element {
           </Link>
         ) : (
           <Link to={`${AppRoute.Login}`} className="user-block__link">
-        Sign in
+            Sign in
           </Link>
         )}
       </li>

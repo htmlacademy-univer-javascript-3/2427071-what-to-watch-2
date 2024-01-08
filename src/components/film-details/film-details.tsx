@@ -1,6 +1,6 @@
 import React from 'react';
 import { IFilmPromoInfo } from '../../types/film-types.ts';
-import { formatRunTime } from '../../utils/format-time.ts';
+import { formatRunTime } from '../../utils/format-date-time.ts';
 
 type FilmDetailsProps = {
   film: IFilmPromoInfo;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { IReview } from '../../types/review-types.ts';
+import {formatReviewDate} from '../../utils/format-date-time.ts';
 
 type ReviewsProps = {
   reviews: IReview[];
@@ -9,7 +10,7 @@ type ReviewProps = {
   review: IReview;
 };
 
-function Review({ review }: ReviewProps): React.JSX.Element {
+function FilmReview({ review }: ReviewProps): React.JSX.Element {
   return (
     <div className="review" data-testid="review">
       <blockquote className="review__quote">
@@ -17,7 +18,7 @@ function Review({ review }: ReviewProps): React.JSX.Element {
         <footer className="review__details">
           <cite className="review__author">{review.user}</cite>
           <time className="review__date" dateTime="Дата отзыва">
-            {review.date.toString()}
+            {formatReviewDate(review.date.toString())}
           </time>
         </footer>
       </blockquote>
@@ -32,12 +33,12 @@ function FilmReviews({
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {reviews.slice(0, reviews.length / 2).map((review) => (
-          <Review key={review.id} review={review} />
+          <FilmReview key={review.id} review={review} />
         ))}
       </div>
       <div className="film-card__reviews-col">
         {reviews.slice(reviews.length / 2, reviews.length).map((review) => (
-          <Review key={review.id} review={review} />
+          <FilmReview key={review.id} review={review} />
         ))}
       </div>
     </div>

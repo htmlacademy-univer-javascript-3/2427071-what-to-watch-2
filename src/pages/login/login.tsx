@@ -6,11 +6,13 @@ import {EMAIL_PATTERN, PASSWORD_PATTERN} from '../../constants/validation-patter
 import {AuthStatus} from '../../enums/auth-status.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {loginAction} from '../../store/api-actions.ts';
-import {getAuthStatus} from '../../store/user-process/user-process.selectors.ts';
+import {getAuthHasError, getAuthStatus} from '../../store/user-process/user-process.selectors.ts';
 
 function Login(): React.JSX.Element {
   const [error, setError] = useState('');
   const dispatch = useAppDispatch();
+
+  const hasError = useAppSelector(getAuthHasError);
 
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -39,7 +41,9 @@ function Login(): React.JSX.Element {
           email: emailRef.current.value,
           password: passwordRef.current.value,
         })
-      );
+      ).catch(() => {
+        setError('Ошибка сервера');
+      });
     }
   };
 
@@ -55,7 +59,7 @@ function Login(): React.JSX.Element {
       </header>
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
-          {error && (
+          {(error || hasError) && (
             <div className="sign-in__message">
               <p>{error}</p>
             </div>

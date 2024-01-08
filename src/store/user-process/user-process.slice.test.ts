@@ -7,7 +7,8 @@ import { userProcessSlice } from './user-process.slice';
 describe('User process slice', () => {
   const initialState: UserProcessState = {
     user: null,
-    authorizationStatus: AuthStatus.NoAuth
+    authorizationStatus: AuthStatus.NoAuth,
+    hasError: false
   };
   it('should return initial state', () => {
     const emptyAction = {type: ''};
@@ -32,6 +33,7 @@ describe('User process slice', () => {
     const expectedState = {
       user,
       authorizationStatus: AuthStatus.Auth,
+      hasError: false,
     };
 
     it('should login and set user in state', () => {
@@ -45,6 +47,7 @@ describe('User process slice', () => {
     const state: UserProcessState = {
       user,
       authorizationStatus: AuthStatus.Auth,
+      hasError: false
     };
 
     it('should logout, change status and remove user in state', () => {
@@ -58,6 +61,7 @@ describe('User process slice', () => {
     const expectedState = {
       user,
       authorizationStatus: AuthStatus.Auth,
+      hasError: false
     };
 
     it('should set user and auth status in state', () => {

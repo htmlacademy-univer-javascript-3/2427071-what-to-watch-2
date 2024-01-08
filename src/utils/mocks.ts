@@ -79,7 +79,7 @@ export const createReview = (): IReview => ({
 
 
 export const createFakeStore = (initialState?: Partial<State>): State => ({
-  USER: {authorizationStatus: AuthStatus.NoAuth, user: null},
+  USER: {authorizationStatus: AuthStatus.NoAuth, user: null, hasError: false},
   FILM: {
     currentFilm: null,
     isLoadingFilm: true,

@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchFilmByIdAction} from '../../store/api-actions.ts';
 import {getFilm, getIsLoadingFilm} from '../../store/film-process/film-process.selectors.ts';
 import { Spinner } from '../../components/spinner/spinner.tsx';
-import { calcRemainingTime } from '../../utils/format-time.ts';
+import { calcRemainingTime } from '../../utils/format-date-time.ts';
 import PageNotFound from '../page-not-found/page-not-found.tsx';
 
 function Player(): React.JSX.Element {
@@ -82,7 +82,7 @@ function Player(): React.JSX.Element {
   }, [id, dispatch, film?.id]);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner size="large"/>;
   }
 
   if (!film && !id) {

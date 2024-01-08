@@ -51,6 +51,19 @@ describe('Api actions', () => {
         loginAction.fulfilled.type,
       ]);
     });
+
+    it('should dispatch "loginUser.pending", "redirectToRoute", "loginUser.rejected" when server response 400', async() => {
+      const fakeUser: AuthData = createFakeUser();
+      mockAxiosAdapter.onPost('/login').reply(400);
+
+      await store.dispatch(loginAction(fakeUser));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        loginAction.pending.type,
+        loginAction.rejected.type,
+      ]);
+    });
   });
 
   describe('logoutAction', () => {
