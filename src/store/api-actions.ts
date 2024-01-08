@@ -60,6 +60,7 @@ export const checkAuthStatusAction = createAsyncThunk<
   'user/login',
   async (_arg, { extra: api}) => {
     const {data} = await api.get<UserData>(AppRoute.Login);
+
     return data;
   },
 );
@@ -124,6 +125,7 @@ export const fetchFavoriteFilmsAction = createAsyncThunk<
     async (_arg, { extra: api}) => {
 
       const {data} = await api.get<IFilm[]>('/favorite');
+
       return data;
 
     }
@@ -140,6 +142,7 @@ export const fetchFilmPromoAction = createAsyncThunk<
     '/promo',
     async (_arg, { extra: api}) => {
       const { data } = await api.get<IFilmPromo>('/promo');
+
       return data;
     },
   );
@@ -173,7 +176,6 @@ export const addCommentAction = createAsyncThunk<void, AddUserReview, {
   },
 );
 
-// TODO add tests
 export const changeFavoriteStatusAction = createAsyncThunk<
   void,
   {filmId: string; status: FavoriteStatus},
