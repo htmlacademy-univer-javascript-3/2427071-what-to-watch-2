@@ -30,12 +30,20 @@ function FilmPage(): React.JSX.Element {
   );
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchFilmByIdAction(id));
-      dispatch(fetchSimilarFilmsAction(id));
-      dispatch(fetchFilmReviewsAction(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (id && id !== film?.id) {
+        dispatch(fetchFilmByIdAction(id));
+        dispatch(fetchSimilarFilmsAction(id));
+        dispatch(fetchFilmReviewsAction(id));
+      }
     }
-  }, [id, dispatch]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id, dispatch, film?.id]);
 
   if (isLoading && !film) {
     return <Spinner />;

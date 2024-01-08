@@ -5,7 +5,7 @@ import {FilmsProcessState} from '../../types/state';
 import {fetchFavoriteFilmsAction, fetchFilmPromoAction, fetchFilmsAction} from '../api-actions';
 import {filmsProcessSlice, setActiveGenre, setFilmsByGenre} from './films-process.slice';
 
-describe('Films process slice Test', () => {
+describe('FilmsProcess slice Test', () => {
   let initialState: FilmsProcessState;
 
   beforeEach(() => {

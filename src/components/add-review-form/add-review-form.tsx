@@ -16,7 +16,6 @@ function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
     ...DEFAULT_FORM_VALUE,
   });
 
-  const [error, setError] = useState('');
   const [serverError, setServerError] = useState('');
 
   const dispatch = useAppDispatch();
@@ -51,23 +50,7 @@ function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
     (evt: FormEvent<HTMLFormElement>) => {
       evt.preventDefault();
 
-      setError('');
       setServerError('');
-
-      if (review.rating < 1) {
-        setError('Rating is required');
-        return;
-      }
-
-      if (
-        review.comment.trim().length < MIN_REVIEW ||
-        review.comment.trim().length > MAX_REVIEW
-      ) {
-        setError(
-          'Comment must be longer than or equal to 50 and shorter than 400 characters'
-        );
-        return;
-      }
 
       dispatch(
         addCommentAction({
@@ -132,9 +115,9 @@ function AddReviewForm({filmId}: ReviewFormProps): React.JSX.Element {
             </button>
           </div>
         </div>
-        {(error || serverError) && (
+        {serverError && (
           <div className="add-review__field--error">
-            <p>{error || serverError}</p>
+            <p>{serverError}</p>
           </div>
         )}
       </form>

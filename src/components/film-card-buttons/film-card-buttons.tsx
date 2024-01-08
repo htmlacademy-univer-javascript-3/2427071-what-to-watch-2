@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../enums/app-route';
+import {ButtonSize} from '../../enums/buttons.ts';
 import { FavoriteStatus } from '../../enums/favorite-status';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import { changeFavoriteStatusAction, fetchFavoriteFilmsAction, fetchFilmByIdAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
@@ -45,15 +46,29 @@ function FilmCardButtons({
   };
 
   useEffect(() => {
-    if (!id && params.id) {
-      dispatch(fetchFilmByIdAction(params.id));
-      dispatch(fetchSimilarFilmsAction(params.id));
-      dispatch(fetchFilmReviewsAction(params.id));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (!id && params.id) {
+        dispatch(fetchFilmByIdAction(params.id));
+        dispatch(fetchSimilarFilmsAction(params.id));
+        dispatch(fetchFilmReviewsAction(params.id));
+      }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [params.id, dispatch, id]);
 
   useEffect(() => {
-    dispatch(fetchFavoriteFilmsAction());
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchFavoriteFilmsAction());
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch]);
 
   return (
@@ -63,7 +78,7 @@ function FilmCardButtons({
         type="button"
         to={`${AppRoute.Player}/${id}`}
       >
-        <svg viewBox="0 0 19 19" width={19} height={19}>
+        <svg viewBox="0 0 19 19" width={ButtonSize.WIDTH} height={ButtonSize.HEIGHT}>
           <use xlinkHref="#play-s" />
         </svg>
         <span>Play</span>
@@ -74,11 +89,11 @@ function FilmCardButtons({
         onClick={handleChangeFavorite}
       >
         {isFavorite ? (
-          <svg viewBox="0 0 18 14" width="18" height="14">
+          <svg viewBox="0 0 18 14" width={ButtonSize.WIDTH} height={ButtonSize.HEIGHT}>
             <use xlinkHref="#in-list"></use>
           </svg>
         ) : (
-          <svg viewBox="0 0 19 20" width={19} height={20}>
+          <svg viewBox="0 0 19 20" width={ButtonSize.WIDTH} height={ButtonSize.HEIGHT}>
             <use xlinkHref="#add"></use>
           </svg>
         )}

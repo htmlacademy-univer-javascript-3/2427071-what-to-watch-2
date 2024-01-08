@@ -2,7 +2,7 @@ import React from 'react';
 import {HelmetProvider} from 'react-helmet-async';
 import {Routes, Route} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/store.ts';
-import MainPage from '../../pages/main/main-page';
+import MainPage from '../../pages/main-page/main-page';
 import MyList from '../../pages/my-list/my-list';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import AddReview from '../../pages/add-review/add-review';

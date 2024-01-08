@@ -68,9 +68,17 @@ function Player(): React.JSX.Element {
   }, [navigate]);
 
   useEffect(() => {
-    if (id && id !== film?.id) {
-      dispatch(fetchFilmByIdAction(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (id && id !== film?.id) {
+        dispatch(fetchFilmByIdAction(id));
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [id, dispatch, film?.id]);
 
   if (isLoading) {

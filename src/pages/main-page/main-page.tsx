@@ -15,11 +15,19 @@ function MainPage(): React.JSX.Element | null {
   const isAuth = authStatus === AuthStatus.Auth;
 
   useEffect(() => {
-    dispatch(fetchFilmPromoAction());
+    let isMounted = true;
 
-    if (isAuth) {
-      dispatch(fetchFavoriteFilmsAction());
+    if (isMounted) {
+      dispatch(fetchFilmPromoAction());
+
+      if (isAuth) {
+        dispatch(fetchFavoriteFilmsAction());
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, isAuth]);
 
   if (!promoFilm) {

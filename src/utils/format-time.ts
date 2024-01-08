@@ -1,6 +1,6 @@
 import {SEC_PER_HOUR, SEC_PER_MINUTE} from '../constants/time';
 
-export const formatRunTime = (runTime: number) => {
+export const formatRunTime = (runTime: number): string => {
   const hours = Math.floor(runTime / SEC_PER_HOUR);
   const minutes = Math.floor((runTime % SEC_PER_HOUR) / SEC_PER_MINUTE);
   const seconds = Math.floor(runTime % SEC_PER_MINUTE);
@@ -12,7 +12,7 @@ export const formatRunTime = (runTime: number) => {
   return `${preparedHours}:${preparedMinutes}:${preparedSeconds}`;
 };
 
-export function calcRemainingTime(duration: number, currentTime: number) {
+export function calcRemainingTime(duration: number, currentTime: number): string {
   const time = duration - currentTime;
   const hours = Math.floor(time / SEC_PER_HOUR);
   const minutes = Math.floor((time % SEC_PER_HOUR) / SEC_PER_MINUTE);
