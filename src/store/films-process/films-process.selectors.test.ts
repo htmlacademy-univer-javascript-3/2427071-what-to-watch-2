@@ -22,6 +22,7 @@ describe('Films process selectors Test', () => {
       promoFilm: promoFilmMock,
       isLoadingList: true,
       favoriteFilms: [filmMock],
+      isPromoLoading: false,
     }
   };
 

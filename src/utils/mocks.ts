@@ -93,6 +93,7 @@ export const createFakeStore = (initialState?: Partial<State>): State => ({
     promoFilm: null,
     isLoadingList: true,
     favoriteFilms: [],
+    isPromoLoading: false,
   },
   ...initialState ?? {},
 });
