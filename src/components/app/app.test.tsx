@@ -28,6 +28,7 @@ describe('Component: App', () => {
           promoFilm: fakeFilm,
           isLoadingList: true,
           favoriteFilms: [],
+          isPromoLoading: false,
         },
       })
     );
@@ -72,6 +73,7 @@ describe('Component: App', () => {
           promoFilm: null,
           isLoadingList: false,
           favoriteFilms: [fakeFilm],
+          isPromoLoading: false,
         },
       })
     );

@@ -22,6 +22,7 @@ export type FilmsProcessState = {
   promoFilm: IFilmPromo | null;
   isLoadingList: boolean;
   favoriteFilms: IFilm[];
+  isPromoLoading: boolean;
 }
 
 export type FilmProcessState = {

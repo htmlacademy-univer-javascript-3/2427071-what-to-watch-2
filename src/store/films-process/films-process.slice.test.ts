@@ -16,6 +16,7 @@ describe('FilmsProcess slice Test', () => {
       promoFilm: null,
       isLoadingList: false,
       favoriteFilms: [],
+      isPromoLoading: true,
     };
   });
 
